@@ -1,0 +1,7 @@
+{
+  "name": "recipe-list",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
