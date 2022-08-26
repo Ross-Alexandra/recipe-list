@@ -1,0 +1,6 @@
+*.css
+*.svg
+
+serviceWorkerRegistration.ts
+service-worker.ts
+setupTests.ts

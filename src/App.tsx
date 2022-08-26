@@ -1,5 +1,5 @@
 import { Redirect, Route } from 'react-router-dom';
-import {setupIonicReact} from '@ionic/react';
+import { setupIonicReact } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 setupIonicReact();
 

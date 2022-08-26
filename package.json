@@ -49,6 +49,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --transformIgnorePatterns 'node_modules/(?!(@ionic/react|@ionic/react-router|@ionic/core|@stencil/core|ionicons)/)'",
     "eject": "react-scripts eject",
+    "lint": "eslint src/* --fix",
     "start:web": "ionic serve",
     "start:android": "ionic capacitor run android -l --external -c -s",
     "build:web": "npm run build",
@@ -73,7 +74,12 @@
     ]
   },
   "devDependencies": {
-    "@capacitor/cli": "4.1.0"
+    "@capacitor/cli": "4.1.0",
+    "@typescript-eslint/eslint-plugin": "^5.35.1",
+    "@typescript-eslint/parser": "^5.35.1",
+    "eslint": "^8.22.0",
+    "eslint-config-standard-with-typescript": "^22.0.0",
+    "eslint-plugin-react": "^7.31.0"
   },
   "description": "An Ionic project"
 }
