@@ -1,11 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { App } from './App';
+import { IonReactRouter } from '@ionic/react-router';
+import {ModalPortal} from '@ross-alexandra/react-utilities';
+
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
 ReactDOM.render(
     <React.StrictMode>
-        <App />
+        <IonReactRouter>
+            <App />
+        </IonReactRouter>
+        <ModalPortal />
     </React.StrictMode>,
     document.getElementById('root')
 );
