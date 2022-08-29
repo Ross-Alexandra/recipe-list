@@ -21,7 +21,6 @@ import {
     AppBodyInner,
     TabTray,
     Tab,
-    TabText,
     AppPopout,
 } from './elements';
 
@@ -62,11 +61,9 @@ export const App: React.FC = () => {
             <TabTray>
                 <Tab to={'/recipes'} activePage={currentPage === 'recipes'}>
                     <RecipesIcon stroke={'#FFF'} />
-                    <TabText>Recipes</TabText>
                 </Tab>
                 <Tab to={'/groceries'} activePage={currentPage === 'groceries'}>
                     <GroceriesIcon stroke={'#FFF'}/>
-                    <TabText>Groceries</TabText>
                 </Tab>
             </TabTray>
 

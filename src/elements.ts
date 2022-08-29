@@ -33,6 +33,7 @@ export const AppBodyOuter = styled.div`
     flex-grow: 1;
 
     margin-bottom: 20px;
+    overflow: hidden;
 `;
 
 export const AppBodyInner = styled.div`
@@ -42,13 +43,16 @@ export const AppBodyInner = styled.div`
     padding: 10px 20px;
 
     background-color: ${sectionBackgroundColor};
-    border: ${sectionBackgroundColor};
+    border: 1px solid ${sectionBackgroundColor};
     border-radius: 4px;
+
+    overflow-y: auto;
 `;
 
 export const TabTray = styled.div`
     width: 100%;
-    height: 75px;
+    height: 50px;
+    min-height: 50px;
 
     display: flex;
     flex-direction: row;
