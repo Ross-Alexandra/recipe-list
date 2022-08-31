@@ -85,13 +85,12 @@ export const Tab = styled(Link)<{activePage: boolean}>`
 `;
 
 export const TabText = styled.h3`
-    margin: unset;
     text-transform: capitalize;
 `;
 
 export const HamburgerMenuIcon = styled(HamburgerMenu)`
     position: absolute;
-    top: 20px;
+    top: 27.5px;
     right: 10px;
 `;
 

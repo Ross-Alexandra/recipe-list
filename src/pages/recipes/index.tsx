@@ -1,5 +1,10 @@
 import React from 'react';
 import {useRecipes} from '../../services';
+import { RecipeRow } from './recipe-row';
+
+import {
+    RecipesWrapper
+} from './elements';
 
 function deleteMe() {
     return new Date().toTimeString();
@@ -8,27 +13,20 @@ function deleteMe() {
 export const Recipes: React.FC = () => {
     const [recipes, saveRecipe, removeRecipe] = useRecipes();
 
+
     return (
-        <div>
+        <RecipesWrapper>
             {recipes.map(({name, ingredients}) => 
-                <div key={name}>
-                    <h2>{name}</h2>
-                    <ol>
-                        {ingredients.map(({name, type}, index) => 
-                            <li key={index}>
-                                <div>Name: {name}</div>
-                                <div>Type: {type}</div>
-                            </li>    
-                        )}
-                    </ol>
-                    <button onClick={() => removeRecipe(name)}>
-                        Delete
-                    </button>
-                </div>
+                <RecipeRow
+                    key={name}
+                    name={name}
+                    ingredients={ingredients}
+                    removeRecipe={removeRecipe}
+                />
             )}
-            <button onClick={() => saveRecipe(deleteMe(), [{name: deleteMe(), type: deleteMe()}])}>
+            <button onClick={() => saveRecipe(deleteMe(), [{name: deleteMe(), aisle: 'deli'}])}>
                 Add Recipe!
             </button>
-        </div>  
+        </RecipesWrapper>  
     );
 };

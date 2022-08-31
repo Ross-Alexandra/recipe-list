@@ -9,11 +9,12 @@ interface Recipe {
 
 interface Ingredient {
     name: string;
-    type: string;
+    aisle: string;
 }
 
 interface Grocery {
     name: string;
     aisle: string;
     usedBy: string[];
+    checked: boolean;
 }

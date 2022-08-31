@@ -8,8 +8,8 @@ const SVGElement = styled.svg`
 `;
 
 export const HamburgerMenu: React.FC<React.SVGProps<SVGSVGElement>> = ({
-    width=35,
-    height=35,
+    width=25,
+    height=25,
     stroke='#000000',
     ...props
 }) => {
@@ -18,13 +18,19 @@ export const HamburgerMenu: React.FC<React.SVGProps<SVGSVGElement>> = ({
             width={width}
             height={height}
             {...props}
-            xmlns="http://www.w3.org/2000/svg"
+            
+            clipRule="evenodd"
+            fillRule="evenodd"
+            strokeLinejoin="round"
+            strokeMiterlimit="2"
             viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
         >
             <path
-                d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10S2 17.514 2 12 6.486 2 12 2zm0-2C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm6 17H6v-2h12v2zm0-4H6v-2h12v2zm0-4H6V7h12v2z"
+                d="M11 16.745a.75.75 0 01.75-.75h9.5a.75.75 0 010 1.5h-9.5a.75.75 0 01-.75-.75zm-9-5a.75.75 0 01.75-.75h18.5a.75.75 0 010 1.5H2.75a.75.75 0 01-.75-.75zm4-5a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H6.75a.75.75 0 01-.75-.75z"
+                fillRule="nonzero"
                 stroke={stroke}
-                fill={stroke} 
+                fill={stroke}
             />
         </SVGElement>
     );
