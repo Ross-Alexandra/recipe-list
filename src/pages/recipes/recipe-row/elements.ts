@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { Animate as _Animate } from '@ross-alexandra/react-utilities';
 import { 
     AddToList as _AddToList,
     Chevron as _Chevron,
@@ -9,9 +10,12 @@ import { sectionBackgroundColor, sectionBorderColor } from '../../../palette';
 export const RecipeWrapper = styled.div``;
 
 export const RecipeHeader = styled.div`
+    height: 65px;
     display: flex;
     flex-direction: row;
     align-items: center;
+
+    border-bottom: 1px solid ${sectionBorderColor};
 `;
 
 export const Chevron = styled(_Chevron)<{
@@ -48,10 +52,16 @@ export const IngredientsWrapper = styled.div`
     background-color: ${sectionBackgroundColor};
 `;
 
+export const Animate = styled(_Animate)`
+    overflow: hidden;
+`;
+
+export const INGREDIENT_ROW_HEIGHT = 70;
 export const Ingredient = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
+    height: ${INGREDIENT_ROW_HEIGHT}px;
 
     border-bottom: 1px dotted ${sectionBorderColor};
 
@@ -81,6 +91,7 @@ export const IngredientName = styled.h4`
 
 export const IngredientAisle = styled.p`
     font-size: 12px;
+    text-transform: capitalize;
 
     opacity: 0.5;
     text-overflow: ellipsis;

@@ -3,7 +3,10 @@ import {useRecipes} from '../../services';
 import { RecipeRow } from './recipe-row';
 
 import {
-    RecipesWrapper
+    RecipesWrapper,
+    NewRecipeWrapper,
+    AddNewItemText,
+    NewItem
 } from './elements';
 
 function deleteMe() {
@@ -24,9 +27,13 @@ export const Recipes: React.FC = () => {
                     removeRecipe={removeRecipe}
                 />
             )}
-            <button onClick={() => saveRecipe(deleteMe(), [{name: deleteMe(), aisle: 'deli'}])}>
-                Add Recipe!
-            </button>
+            <NewRecipeWrapper>
+                <AddNewItemText>New Recipe!</AddNewItemText>
+                <NewItem
+                    onClick={() => saveRecipe(deleteMe(), [{name: deleteMe(), aisle: 'deli'}])}
+                    stroke={'#fff'}
+                />
+            </NewRecipeWrapper>
         </RecipesWrapper>  
     );
 };

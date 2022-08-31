@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {keyframes} from '@emotion/react';
 import { useGroceries } from '../../../services';
  
 import {
@@ -13,6 +14,8 @@ import {
     IngredientInfo,
     IngredientName,
     IngredientAisle,
+    Animate,
+    INGREDIENT_ROW_HEIGHT,
 } from './elements';
 
 export interface RecipeRowProps {
@@ -32,29 +35,37 @@ export const RecipeRow: React.FC<RecipeRowProps> = ({name, ingredients, removeRe
                 <RecipeTitle>{name}</RecipeTitle>
             </RecipeHeader>
 
-            {expanded && (
-                <>
-                    <IngredientsWrapper>
-                        {ingredients.map(({name: ingredientName, aisle}, index) => 
-                            <Ingredient key={index}>
-                                {groceries.map(({name}) => name).includes(ingredientName) ? (
-                                    <RemoveFromList stroke={'#FFF'} onClick={() => removeGrocery(ingredientName)} />
-                                ) : (
-                                    <AddToList stroke={'#FFF'} onClick={() => saveGrocery(ingredientName, aisle, name)} />
-                                )}
-                                <IngredientInfo>
-                                    <IngredientName>{ingredientName}</IngredientName>
-                                    <IngredientAisle>{aisle}</IngredientAisle>
-                                </IngredientInfo>
-                            </Ingredient>    
-                        )}
-                    </IngredientsWrapper>
+            <Animate
+                display={expanded}
+                animationIn={keyframes`
+                    from {max-height: 0px}
+                    to {max-height: ${INGREDIENT_ROW_HEIGHT * ingredients.length}px}
+                `}
+                animationOut={keyframes`
+                    from {max-height: ${INGREDIENT_ROW_HEIGHT * ingredients.length}px}
+                    to {max-height: 0px}
+                `}
+            >
+                <IngredientsWrapper>
+                    {ingredients.map(({name: ingredientName, aisle}, index) => 
+                        <Ingredient key={index}>
+                            {groceries.map(({name}) => name).includes(ingredientName) ? (
+                                <RemoveFromList stroke={'#FFF'} onClick={() => removeGrocery(ingredientName)} />
+                            ) : (
+                                <AddToList stroke={'#FFF'} onClick={() => saveGrocery(ingredientName, aisle, name)} />
+                            )}
+                            <IngredientInfo>
+                                <IngredientName>{ingredientName}</IngredientName>
+                                <IngredientAisle>{aisle}</IngredientAisle>
+                            </IngredientInfo>
+                        </Ingredient>    
+                    )}
+                </IngredientsWrapper>
 
-                    <button onClick={() => removeRecipe(name)}>
-                        Delete
-                    </button>
-                </>
-            )}
+                <button onClick={() => removeRecipe(name)}>
+                    Delete
+                </button>
+            </Animate>
         </RecipeWrapper>
     );
 };
