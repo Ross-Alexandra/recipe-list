@@ -26,3 +26,20 @@ export const TextInputCSS = (hasErrors: boolean) => css`
         //font-family: 'Poppins', sans-serif;
     }
 `;
+
+export const ButtonCSS = () => css`
+    display: grid;
+    place-items: center;
+    height: 40px;
+    padding: 0px 20px;
+
+    font-size: 17px;
+    font-family: 'Poppins', sans-serif;
+
+    background-color: ${sectionBackgroundColor};
+    border: 1px solid ${sectionBorderColor};
+
+    cursor: pointer;
+
+    border-radius: 4px;
+`;

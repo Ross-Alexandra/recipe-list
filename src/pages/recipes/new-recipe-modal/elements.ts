@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import {sectionBackgroundColor, sectionBorderColor, TextInputCSS } from '../../../palette';
+import {ButtonCSS, sectionBackgroundColor, sectionBorderColor, TextInputCSS } from '../../../palette';
 import {
     ModalFrame as _ModalFrame
 } from '@ross-alexandra/react-utilities';
@@ -123,20 +123,7 @@ export const AisleSelector = styled.select<{
 export const AisleOption = styled.option``;
 
 export const CreateRecipeButton = styled.div`
-    display: grid;
-    place-items: center;
-    height: 40px;
-    padding: 0px 20px;
-
-    font-size: 17px;
-    font-family: 'Poppins', sans-serif;
-
-    background-color: ${sectionBackgroundColor};
-    border: 1px solid ${sectionBorderColor};
-
-    cursor: pointer;
-
-    border-radius: 4px;
+    ${ButtonCSS()}
 `;
 
 export const NewItem = styled(_NewItem)`

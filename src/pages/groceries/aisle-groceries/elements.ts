@@ -38,6 +38,12 @@ export const Chevron = styled(_Chevron)<{
     `}
 `;
 
+export const AisleItemCount = styled.p`
+    margin-left: auto;
+
+    opacity: 0.5;
+`;
+
 export const AisleTitle = styled.h3`
     margin: 0px;
 

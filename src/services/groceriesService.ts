@@ -8,54 +8,35 @@ type UseGroceries = [Grocery[], {
     uncheck: typeof uncheckGrocery
 }];
 
-export function useGroceries(fromAisle?: string): UseGroceries {
-    const [groceries, setGroceries] = useState(() => getGroceries(fromAisle));
+export function useGroceries(): UseGroceries {
+    const [groceries, setGroceries] = useState(() => getGroceries());
     
     const _saveGrocery = useCallback((name: string, aisle: string, from: string) => {
         const newGroceries = saveGrocery(name, aisle, from);
 
-        if (fromAisle) {
-            setGroceries(newGroceries.filter(({aisle}) => aisle === fromAisle));
-        } else {
-            setGroceries(newGroceries);
-        }
-
+        setGroceries(newGroceries);
         return newGroceries;
     }, [setGroceries, saveGrocery]);
 
     const _removeGrocery = useCallback((name: string) => {
         const newGroceries = removeGrocery(name);
 
-        if (fromAisle) {
-            setGroceries(newGroceries.filter(({aisle}) => aisle === fromAisle));
-        } else {
-            setGroceries(newGroceries);
-        }
-
+        setGroceries(newGroceries);
         return newGroceries;
     }, [setGroceries, removeGrocery]);
 
     const _checkGrocery = useCallback((name: string) => {
         const newGroceries = checkGrocery(name);
 
-        if (fromAisle) {
-            setGroceries(newGroceries.filter(({aisle}) => aisle === fromAisle));
-        } else {
-            setGroceries(newGroceries);
-        }
-
+        setGroceries(newGroceries);
         return newGroceries;
     }, [setGroceries, checkGrocery]);
 
     const _uncheckGrocery = useCallback((name: string) => {
         const newGroceries = uncheckGrocery(name);
 
-        if (fromAisle) {
-            setGroceries(newGroceries.filter(({aisle}) => aisle === fromAisle));
-        } else {
-            setGroceries(newGroceries);
-        }
-        
+
+        setGroceries(newGroceries);
         return newGroceries;
     }, [setGroceries, uncheckGrocery]);
 
@@ -67,11 +48,10 @@ export function useGroceries(fromAisle?: string): UseGroceries {
     }];
 }
 
-export function getGroceries(fromAisle?: string) {
+export function getGroceries() {
     const groceriesString = window.localStorage.getItem('groceries') || JSON.stringify([]);
     const groceries: Grocery[] = JSON.parse(groceriesString);
 
-    if (fromAisle) return groceries.filter(({aisle}) => aisle === fromAisle);
     return groceries;
 }
 

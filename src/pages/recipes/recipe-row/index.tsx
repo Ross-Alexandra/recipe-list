@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import {keyframes} from '@emotion/react';
 import { useGroceries } from '../../../services';
  
@@ -7,6 +7,7 @@ import {
     RecipeHeader,
     Chevron,
     RecipeTitle,
+    GarbageCan,
     IngredientsWrapper,
     Ingredient,
     AddToList,
@@ -15,6 +16,12 @@ import {
     IngredientName,
     IngredientAisle,
     Animate,
+    Modal,
+    ModalFrame,
+    WarningTitle,
+    ButtonsWrapper,
+    PrimaryButton,
+    SecondaryButton,
     INGREDIENT_ROW_HEIGHT,
 } from './elements';
 
@@ -27,12 +34,20 @@ export interface RecipeRowProps {
 export const RecipeRow: React.FC<RecipeRowProps> = ({name, ingredients, removeRecipe}) => {
     const [groceries, {save: saveGrocery, remove: removeGrocery}] = useGroceries();
     const [expanded, setExpanded] = useState(false);
+    const [removeWarningDisplayed, setRemoveWarningDisplayed] = useState(false);
+
+    const onClickGarbageCan = useCallback((e: React.MouseEvent) => {
+        e.stopPropagation();
+
+        setRemoveWarningDisplayed(true);
+    }, [setRemoveWarningDisplayed]);
 
     return (
         <RecipeWrapper>
             <RecipeHeader onClick={() => setExpanded(isExpanded => !isExpanded)}>
                 <Chevron expanded={expanded} stroke={'#FFF'} />
                 <RecipeTitle>{name}</RecipeTitle>
+                <GarbageCan stroke={'#FFF'} onClick={onClickGarbageCan}/>
             </RecipeHeader>
 
             <Animate
@@ -61,11 +76,20 @@ export const RecipeRow: React.FC<RecipeRowProps> = ({name, ingredients, removeRe
                         </Ingredient>    
                     )}
                 </IngredientsWrapper>
-
-                <button onClick={() => removeRecipe(name)}>
-                    Delete
-                </button>
             </Animate>
+
+            <Modal
+                isOpen={removeWarningDisplayed}
+                onBackgroundClick={() => setRemoveWarningDisplayed(false)}
+            >
+                <ModalFrame closeButtonColor='#FFF' handleClose={() => setRemoveWarningDisplayed(false)}>
+                    <WarningTitle>Really remove this recipe?</WarningTitle>
+                    <ButtonsWrapper>
+                        <PrimaryButton onClick={() => setRemoveWarningDisplayed(false)}>No</PrimaryButton>
+                        <SecondaryButton onClick={() => removeRecipe(name)}>Yes</SecondaryButton>
+                    </ButtonsWrapper>
+                </ModalFrame>
+            </Modal>
         </RecipeWrapper>
     );
 };

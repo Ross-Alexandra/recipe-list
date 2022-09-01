@@ -1,11 +1,16 @@
 import styled from '@emotion/styled';
-import { Animate as _Animate } from '@ross-alexandra/react-utilities';
+import {
+    Animate as _Animate,
+    Modal as _Modal,
+    ModalFrame as _ModalFrame
+} from '@ross-alexandra/react-utilities';
 import { 
     AddToList as _AddToList,
     Chevron as _Chevron,
-    RemoveFromList as _RemoveFromList
+    RemoveFromList as _RemoveFromList,
+    GarbageCan as _GarbageCan
 } from '../../../icons';
-import { sectionBackgroundColor, sectionBorderColor } from '../../../palette';
+import { backgroundColor, ButtonCSS, sectionBackgroundColor, sectionBorderColor } from '../../../palette';
 
 export const RecipeWrapper = styled.div`
     border-bottom: 1px solid ${sectionBorderColor};
@@ -41,6 +46,12 @@ export const RecipeTitle = styled.h3`
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+`;
+
+export const GarbageCan = styled(_GarbageCan)`
+    margin-left: auto;
+
+    cursor: pointer;
 `;
 
 export const IngredientsWrapper = styled.div`
@@ -112,4 +123,40 @@ export const RemoveFromList = styled(_RemoveFromList)`
     flex-shrink: 0;
 
     cursor: pointer;
+`;
+
+export const Modal = styled(_Modal)`
+    .modal {
+        width: 90vw;
+        background-color: ${backgroundColor};
+    }
+`;
+
+export const ModalFrame = styled(_ModalFrame)`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    row-gap: 35px;
+`;
+
+export const WarningTitle = styled.h3``;
+
+export const ButtonsWrapper = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+
+    width: 75%;
+`;
+
+export const PrimaryButton = styled.div`
+    ${ButtonCSS()}
+`;
+
+export const SecondaryButton = styled.div`
+    ${ButtonCSS()}
+
+    opacity: 0.9;
 `;

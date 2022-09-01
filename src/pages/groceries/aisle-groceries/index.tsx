@@ -8,6 +8,7 @@ import {
     AisleTitle,
     AisleBody,
     Chevron,
+    AisleItemCount,
     GroceryRow,
     GroceryInfo,
     GroceryCheckedBox,
@@ -16,7 +17,6 @@ import {
     GroceryUsedBy,
     GROCERY_ROW_HEIGHT
 } from './elements';
-import { useGroceries } from '../../../services';
 import _ from 'lodash';
 
 function getAndMoreText(maxCharacters: number, totalItems: number, text: string) {
@@ -31,15 +31,22 @@ function getAndMoreText(maxCharacters: number, totalItems: number, text: string)
 
 export interface AisleGroceriesProps {
     aisleName: string;
+    groceries: Grocery[];
+    checkGrocery: (name: string) => Grocery[];
+    uncheckGrocery: (name: string) => Grocery[];
 }
 
 export const AisleGroceries: React.FC<AisleGroceriesProps> = ({
-    aisleName
+    aisleName,
+    groceries,
+    checkGrocery,
+    uncheckGrocery,
 }) => {
-    const [groceries, {check, uncheck}] = useGroceries(aisleName);
     const [expanded, setExpanded] = useState(() => {
         return !groceries.every(({checked}) => checked);
     });
+
+    const checkedItemCount = groceries.filter(({checked}) => checked).length;
 
     if (_.isEmpty(groceries)) return null;
     return (
@@ -47,6 +54,7 @@ export const AisleGroceries: React.FC<AisleGroceriesProps> = ({
             <AisleHeader onClick={() => setExpanded(isExpanded => !isExpanded)}>
                 <Chevron expanded={expanded} stroke='#fff'/>
                 <AisleTitle>{aisleName}</AisleTitle>
+                <AisleItemCount>{`${checkedItemCount} / ${groceries.length}`}</AisleItemCount>
             </AisleHeader>
 
             <Animate
@@ -67,16 +75,16 @@ export const AisleGroceries: React.FC<AisleGroceriesProps> = ({
                                 <GroceryCheckedBox
                                     stroke={'#FFF'}
                                     onClick={() => {
-                                        if (checked) uncheck(name);
-                                        else check(name);
+                                        if (checked) uncheckGrocery(name);
+                                        else checkGrocery(name);
                                     }}    
                                 />
                             ) : (
                                 <GroceryUncheckedBox
                                     stroke={'#FFF'}
                                     onClick={() => {
-                                        if (checked) uncheck(name);
-                                        else check(name);
+                                        if (checked) uncheckGrocery(name);
+                                        else checkGrocery(name);
                                     }}    
                                 />
                             )}

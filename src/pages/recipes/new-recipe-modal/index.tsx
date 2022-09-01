@@ -33,9 +33,9 @@ export const NewRecipeModal: React.FC<NewRecipeModalProps> = ({
     saveNewRecipe
 }) => {
     const [aisles] = useAisles();
-    const [recipeName, setRecipeName] = useState<string | undefined>();
-    const [newIngredientName, setNewIngredientName] = useState<string | undefined>();
-    const [newIngredientAisle, setNewIngredientAisle] = useState<string | undefined>(_.get(aisles, 0));
+    const [recipeName, setRecipeName] = useState<string>('');
+    const [newIngredientName, setNewIngredientName] = useState<string>('');
+    const [newIngredientAisle, setNewIngredientAisle] = useState<string>(_.get(aisles, 0));
     const [recipeIngredients, setRecipeIngredients] = useState<Ingredient[]>([]);
     
     const [errors, {newError, clearFieldErrors}] = useFieldErrors<{
@@ -64,21 +64,17 @@ export const NewRecipeModal: React.FC<NewRecipeModalProps> = ({
 
     const saveCurrentIngredient = useCallback(() => {
         if (!newIngredientName) { 
-            console.log('Ingredient name is blank');
             newError('ingredientName', 'is-blank');
             return;
         } else if (recipeIngredients.some(({name}) => name === newIngredientName)) {
-            console.log('Ingredient name exists');
             newError('ingredientName', 'ingredient-exists');
             return;
         }
 
         if (!newIngredientAisle) {
-            console.log('Ingredient aisle is blank');
             newError('aisle', 'is-blank');
             return;
         }
-
 
         setRecipeIngredients(currentRecipeIngredients => {
             const nextRecipeIngredients: Ingredient[] = [
@@ -173,11 +169,14 @@ export const NewRecipeModal: React.FC<NewRecipeModalProps> = ({
                     }
 
                     if (_.some(Object.values(errors))) {
-                        console.log('Errors exist, not saving recipe.');
                         return;
                     }
 
-                    saveNewRecipe(recipeName, recipeIngredients);
+                    if (newIngredientName && recipeIngredients.every(({name}) => name !== newIngredientName)) {
+                        saveNewRecipe(recipeName, [...recipeIngredients, {name: newIngredientName, aisle: newIngredientAisle}]);
+                    } else {
+                        saveNewRecipe(recipeName, recipeIngredients);
+                    }
                 }}
             >
                 Save
