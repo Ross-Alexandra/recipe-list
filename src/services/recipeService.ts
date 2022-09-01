@@ -29,7 +29,10 @@ export function getRecipes(): Recipe[] {
 
 export function saveRecipe(name: string, ingredients: Ingredient[]) {
     const existingRecipes = getRecipes();
-    const newRecipe = {name, ingredients};
+    const newRecipe = {name: name, ingredients: ingredients.map(({name, aisle}) => ({
+        name: name.toLowerCase(),
+        aisle
+    }))};
 
     // _.findIndex returns -1 if the item can't be found, so
     // if recipeToOverwrite is >= 0, then we know this recipe

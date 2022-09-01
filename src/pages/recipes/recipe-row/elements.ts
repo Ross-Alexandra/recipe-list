@@ -7,15 +7,15 @@ import {
 } from '../../../icons';
 import { sectionBackgroundColor, sectionBorderColor } from '../../../palette';
 
-export const RecipeWrapper = styled.div``;
+export const RecipeWrapper = styled.div`
+    border-bottom: 1px solid ${sectionBorderColor};
+`;
 
 export const RecipeHeader = styled.div`
     height: 65px;
     display: flex;
     flex-direction: row;
     align-items: center;
-
-    border-bottom: 1px solid ${sectionBorderColor};
 `;
 
 export const Chevron = styled(_Chevron)<{

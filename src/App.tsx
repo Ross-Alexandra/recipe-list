@@ -36,7 +36,14 @@ export const App: React.FC = () => {
     return (
         <AppWrapper>
             <AppTitle>{currentPage}</AppTitle>
-            <HamburgerMenuIcon onClick={handleOpenPopout} stroke='#FFF' />
+            
+            {/* In the future, the hamburder menu should include the ability
+                to:
+                    - Edit aisles
+                    - Sync to web
+                    - ???
+            */}
+            {false && <HamburgerMenuIcon onClick={handleOpenPopout} stroke='#FFF' /> }
 
             <AppBodyOuter>
                 <AppBodyInner>
@@ -68,6 +75,7 @@ export const App: React.FC = () => {
             </TabTray>
 
             <AppPopout
+                portalId='app-menu'
                 isOpen={popoutIsOpen}
                 animationIn={keyframes`
                     from {right: -100%;}

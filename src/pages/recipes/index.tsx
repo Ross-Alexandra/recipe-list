@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import {useRecipes} from '../../services';
 import { RecipeRow } from './recipe-row';
 
@@ -6,16 +6,22 @@ import {
     RecipesWrapper,
     NewRecipeWrapper,
     AddNewItemText,
-    NewItem
+    NewItem,
+    Modal
 } from './elements';
-
-function deleteMe() {
-    return new Date().toTimeString();
-}
+import { NewRecipeModal } from './new-recipe-modal';
 
 export const Recipes: React.FC = () => {
     const [recipes, saveRecipe, removeRecipe] = useRecipes();
+    const [addingNewRecipe, setAddingNewRecipe] = useState(false);
 
+    const openModal = useCallback(() => setAddingNewRecipe(true), [setAddingNewRecipe]);
+    const closeModal = useCallback(() => setAddingNewRecipe(false), [setAddingNewRecipe]);
+    const saveNewRecipe = useCallback((name, ingredients) => {
+        saveRecipe(name, ingredients);
+
+        closeModal();
+    }, [closeModal]);
 
     return (
         <RecipesWrapper>
@@ -27,13 +33,23 @@ export const Recipes: React.FC = () => {
                     removeRecipe={removeRecipe}
                 />
             )}
-            <NewRecipeWrapper>
+            <NewRecipeWrapper onClick={openModal}>
                 <AddNewItemText>New Recipe!</AddNewItemText>
                 <NewItem
-                    onClick={() => saveRecipe(deleteMe(), [{name: deleteMe(), aisle: 'deli'}])}
                     stroke={'#fff'}
                 />
             </NewRecipeWrapper>
+
+            <Modal
+                isOpen={addingNewRecipe}
+                onBackgroundClick={closeModal}
+            >
+                <NewRecipeModal 
+                    closeModal={closeModal}
+                    saveNewRecipe={saveNewRecipe}
+                />                
+            </Modal>
+
         </RecipesWrapper>  
     );
 };

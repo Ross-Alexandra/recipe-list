@@ -1,8 +1,11 @@
 import styled from '@emotion/styled';
+import { backgroundColor, sectionBorderColor } from '../../palette';
+import {
+    Modal as _Modal
+} from '@ross-alexandra/react-utilities';
 import {
     NewItem as _NewItem
 } from '../../icons';
-import { sectionBorderColor } from '../../palette';
 
 export const RecipesWrapper = styled.div``;
 
@@ -26,3 +29,16 @@ export const NewItem = styled(_NewItem)`
     overflow: visible;
 `;
 
+export const Modal = styled(_Modal)`
+    .modal {
+        width: 90vw;
+        border: 1px solid ${sectionBorderColor};
+        border-radius: 4px;
+
+        background-color: ${backgroundColor};
+    }
+
+    .modal-background {
+        background-color: rgba(0, 0, 0, 0.75);
+    }
+`;

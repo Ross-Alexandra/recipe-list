@@ -11,6 +11,7 @@ ReactDOM.render(
         <IonReactRouter>
             <App />
         </IonReactRouter>
+        <ModalPortal id='app-menu'/>
         <ModalPortal />
     </React.StrictMode>,
     document.getElementById('root')
