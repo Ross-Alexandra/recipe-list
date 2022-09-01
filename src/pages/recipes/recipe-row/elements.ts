@@ -8,7 +8,8 @@ import {
     AddToList as _AddToList,
     Chevron as _Chevron,
     RemoveFromList as _RemoveFromList,
-    GarbageCan as _GarbageCan
+    GarbageCan as _GarbageCan,
+    EditIcon as _EditIcon
 } from '../../../icons';
 import { backgroundColor, ButtonCSS, sectionBackgroundColor, sectionBorderColor } from '../../../palette';
 
@@ -48,9 +49,20 @@ export const RecipeTitle = styled.h3`
     text-overflow: ellipsis;
 `;
 
-export const GarbageCan = styled(_GarbageCan)`
+export const RecipeHeaderIcons = styled.div`
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     margin-left: auto;
+    place-items: end;
 
+    gap: 25px;
+`;
+
+export const EditIcon = styled(_EditIcon)`
+    cursor: pointer;
+`;
+
+export const GarbageCan = styled(_GarbageCan)`
     cursor: pointer;
 `;
 

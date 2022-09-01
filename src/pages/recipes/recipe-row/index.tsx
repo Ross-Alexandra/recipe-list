@@ -6,8 +6,10 @@ import {
     RecipeWrapper,
     RecipeHeader,
     Chevron,
+    RecipeHeaderIcons,
     RecipeTitle,
     GarbageCan,
+    EditIcon,
     IngredientsWrapper,
     Ingredient,
     AddToList,
@@ -29,9 +31,10 @@ export interface RecipeRowProps {
     name: string;
     ingredients: Ingredient[];
     removeRecipe: (name: string) => Recipe[];
+    editRecipe: (name: string) => void;
 }
 
-export const RecipeRow: React.FC<RecipeRowProps> = ({name, ingredients, removeRecipe}) => {
+export const RecipeRow: React.FC<RecipeRowProps> = ({name, ingredients, removeRecipe, editRecipe}) => {
     const [groceries, {save: saveGrocery, remove: removeGrocery}] = useGroceries();
     const [expanded, setExpanded] = useState(false);
     const [removeWarningDisplayed, setRemoveWarningDisplayed] = useState(false);
@@ -42,12 +45,21 @@ export const RecipeRow: React.FC<RecipeRowProps> = ({name, ingredients, removeRe
         setRemoveWarningDisplayed(true);
     }, [setRemoveWarningDisplayed]);
 
+    const onClickEdit = useCallback((e: React.MouseEvent) => {
+        e.stopPropagation();
+
+        editRecipe(name);
+    }, [name]);
+
     return (
         <RecipeWrapper>
             <RecipeHeader onClick={() => setExpanded(isExpanded => !isExpanded)}>
                 <Chevron expanded={expanded} stroke={'#FFF'} />
                 <RecipeTitle>{name}</RecipeTitle>
-                <GarbageCan stroke={'#FFF'} onClick={onClickGarbageCan}/>
+                <RecipeHeaderIcons>
+                    <EditIcon stroke={'#FFF'} onClick={onClickEdit} />
+                    <GarbageCan stroke={'#FFF'} onClick={onClickGarbageCan}/>
+                </RecipeHeaderIcons>
             </RecipeHeader>
 
             <Animate

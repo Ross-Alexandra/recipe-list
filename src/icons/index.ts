@@ -2,6 +2,7 @@ export * from './add-to-list';
 export * from './checked-box';
 export * from './chevron';
 export * from './close';
+export * from './edit';
 export * from './garbage-can';
 export * from './groceries';
 export * from './hamburger-menu';

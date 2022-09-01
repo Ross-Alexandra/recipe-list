@@ -10,13 +10,22 @@ import {
     Modal
 } from './elements';
 import { NewRecipeModal } from './new-recipe-modal';
+import _ from 'lodash';
 
 export const Recipes: React.FC = () => {
     const [recipes, saveRecipe, removeRecipe] = useRecipes();
     const [addingNewRecipe, setAddingNewRecipe] = useState(false);
+    const [editingRecipe, setEditingRecipe] = useState<string | undefined>();
 
-    const openModal = useCallback(() => setAddingNewRecipe(true), [setAddingNewRecipe]);
-    const closeModal = useCallback(() => setAddingNewRecipe(false), [setAddingNewRecipe]);
+    const openModal = useCallback((name?: string) => {
+        setEditingRecipe(name);
+        setAddingNewRecipe(true);
+    }, [setAddingNewRecipe]);
+    const closeModal = useCallback(() => {
+        setEditingRecipe(undefined);
+        setAddingNewRecipe(false);
+    }, [setAddingNewRecipe]);
+
     const saveNewRecipe = useCallback((name, ingredients) => {
         saveRecipe(name, ingredients);
 
@@ -31,9 +40,10 @@ export const Recipes: React.FC = () => {
                     name={name}
                     ingredients={ingredients}
                     removeRecipe={removeRecipe}
+                    editRecipe={() => openModal(name)}
                 />
             )}
-            <NewRecipeWrapper onClick={openModal}>
+            <NewRecipeWrapper onClick={() => openModal()}>
                 <AddNewItemText>New Recipe!</AddNewItemText>
                 <NewItem
                     stroke={'#fff'}
@@ -47,6 +57,7 @@ export const Recipes: React.FC = () => {
                 <NewRecipeModal 
                     closeModal={closeModal}
                     saveNewRecipe={saveNewRecipe}
+                    editingRecipe={_.find(recipes, {name: editingRecipe})}
                 />                
             </Modal>
 

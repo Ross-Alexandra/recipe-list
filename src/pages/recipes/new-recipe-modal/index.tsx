@@ -25,18 +25,20 @@ import { errorCodesToText } from './error-codes-to-text';
 
 export interface NewRecipeModalProps {
     closeModal: () => void;
-    saveNewRecipe: (name: string, ingredients: Ingredient[]) => void; 
+    saveNewRecipe: (name: string, ingredients: Ingredient[]) => void;
+    editingRecipe?: Recipe;
 }
 
 export const NewRecipeModal: React.FC<NewRecipeModalProps> = ({
     closeModal,
-    saveNewRecipe
+    saveNewRecipe,
+    editingRecipe
 }) => {
     const [aisles] = useAisles();
-    const [recipeName, setRecipeName] = useState<string>('');
+    const [recipeName, setRecipeName] = useState<string>(editingRecipe?.name ?? '');
+    const [recipeIngredients, setRecipeIngredients] = useState<Ingredient[]>(editingRecipe?.ingredients ?? []);
     const [newIngredientName, setNewIngredientName] = useState<string>('');
     const [newIngredientAisle, setNewIngredientAisle] = useState<string>(_.get(aisles, 0));
-    const [recipeIngredients, setRecipeIngredients] = useState<Ingredient[]>([]);
     
     const [errors, {newError, clearFieldErrors}] = useFieldErrors<{
         recipeName: FieldError[];
