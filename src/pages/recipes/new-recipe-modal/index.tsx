@@ -91,10 +91,18 @@ export const NewRecipeModal: React.FC<NewRecipeModalProps> = ({
         });
     }, [newError, setRecipeIngredients, newIngredientName, newIngredientAisle]);
 
-    const removeCurrentIngredient = useCallback((nameToRemove: string) => {
+    const removeRecipeIngredient = useCallback((nameToRemove: string) => {
         setRecipeIngredients(currentIngredients => {
             return currentIngredients.filter(({name}) => name !== nameToRemove);
         });
+    }, []);
+
+    const editIngredient = useCallback((nameToEdit: string) => {
+        const aisle = _.find(recipeIngredients, {name: nameToEdit})?.aisle ??  _.get(aisles, 0);
+
+        removeRecipeIngredient(nameToEdit);
+        setNewIngredientAisle(aisle);
+        setNewIngredientName(nameToEdit);
     }, []);
 
     return (
@@ -116,10 +124,10 @@ export const NewRecipeModal: React.FC<NewRecipeModalProps> = ({
             {!_.isEmpty(recipeIngredients) && (
                 <RecipeIngredients>
                     {recipeIngredients.map(({name, aisle}) => 
-                        <IngredientWrapper key={name}>
+                        <IngredientWrapper key={name} onClick={() => editIngredient(name)}>
                             <IngredientName>{name.toLowerCase()}</IngredientName>
                             <IngredientAisle>{aisle}</IngredientAisle>
-                            <Close onClick={() => removeCurrentIngredient(name)}/>
+                            <Close onClick={() => removeRecipeIngredient(name)}/>
                         </IngredientWrapper>
                     )}
                 </RecipeIngredients>
