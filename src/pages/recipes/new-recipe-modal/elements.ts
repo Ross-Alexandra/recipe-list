@@ -9,11 +9,10 @@ import {
 } from '../../../icons';
 
 export const ModalFrame = styled(_ModalFrame)`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    display: grid;
+    place-items: center;
+    gap: 30px;
 
-    row-gap: 30px;
     padding: 2.5vh 0px;
 `;
 
@@ -92,14 +91,14 @@ export const NewIngredient = styled.div`
     display: grid;
     grid-template-columns: minmax(0, .75fr) minmax(0, .25fr) 25px;
     align-items: center;
-    column-gap: 15px;
+    gap: 15px;
 
     width: 90%;
 `;
 
 export const ErrorText = styled.p`
     color: red;
-    font-size: 10px;
+    font-size: 11px;
 `;
 
 export const IngredientNameInput = styled.input<{
@@ -112,8 +111,10 @@ export const AisleSelector = styled.select<{
     hasErrors: boolean;
 }>`
     text-transform: capitalize;
+    box-sizing: border-box;
 
     height: 40px;
+    color: white;
     background-color: ${sectionBackgroundColor};
     border: 1px solid ${sectionBorderColor};
 
@@ -122,10 +123,10 @@ export const AisleSelector = styled.select<{
 
 export const AisleOption = styled.option``;
 
-export const CreateRecipeButton = styled.div`
-    ${ButtonCSS()}
-`;
-
 export const NewItem = styled(_NewItem)`
     overflow: visible;
+`;
+
+export const CreateRecipeButton = styled.div`
+    ${ButtonCSS()}
 `;

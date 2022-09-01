@@ -133,11 +133,10 @@ export const Modal = styled(_Modal)`
 `;
 
 export const ModalFrame = styled(_ModalFrame)`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    row-gap: 35px;
+    display: grid;
+    grid-template-columns: 100%;
+    place-items: center;
+    gap: 35px;
 `;
 
 export const WarningTitle = styled.h3``;

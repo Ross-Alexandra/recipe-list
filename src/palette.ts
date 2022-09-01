@@ -13,6 +13,7 @@ export const TextInputCSS = (hasErrors: boolean) => css`
 
     box-sizing: border-box;
     padding-left: 15px;
+    color: white;
     background-color: ${sectionBackgroundColor};
 
     width: 100%;
