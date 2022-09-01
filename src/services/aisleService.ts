@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 
-export const DEFAULT_AISLES = ['greens', 'meat', 'deli', 'frozen', 'dairy', 'snacks', 'other'];
+export const DEFAULT_AISLES = ['greens', 'meat', 'deli', 'frozen', 'dairy', 'breads', 'snacks', 'other'];
 
 type UseAisles = [string[], typeof saveAisle, typeof removeAisle];
 export function useAisles(): UseAisles {
