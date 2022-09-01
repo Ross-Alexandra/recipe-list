@@ -12,6 +12,7 @@ import {
     EditIcon as _EditIcon
 } from '../../../icons';
 import { backgroundColor, ButtonCSS, sectionBackgroundColor, sectionBorderColor } from '../../../palette';
+import { NewItem } from '../new-recipe-modal/elements';
 
 export const RecipeWrapper = styled.div`
     border-bottom: 1px solid ${sectionBorderColor};
@@ -51,11 +52,17 @@ export const RecipeTitle = styled.h3`
 
 export const RecipeHeaderIcons = styled.div`
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     margin-left: auto;
     place-items: end;
 
     gap: 25px;
+`;
+
+export const AddAll = styled(NewItem)`
+    overflow: visible;
+
+    cursor: pointer;
 `;
 
 export const EditIcon = styled(_EditIcon)`

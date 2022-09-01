@@ -4,7 +4,7 @@ import {
     ModalFrame as _ModalFrame
 } from '@ross-alexandra/react-utilities';
 import { 
-    Close as _Close,
+    Close,
     NewItem as _NewItem
 } from '../../../icons';
 
@@ -58,7 +58,7 @@ export const IngredientWrapper = styled.div`
     boder-radius: 4px;
 `;
 
-export const Close = styled(_Close)`
+export const Remove = styled(Close)`
     position: absolute;
     top: -6px;
     right: -6px;

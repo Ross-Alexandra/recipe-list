@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import React, { useCallback, useState } from 'react';
 import { FieldError, useFieldErrors } from '../../../hooks';
-import { useAisles } from '../../../services';
+import { useAisles, useGroceries } from '../../../services';
 
 import {
     ModalFrame,
@@ -18,7 +18,7 @@ import {
     AisleSelector,
     AisleOption,
     CreateRecipeButton,
-    Close,
+    Remove,
     NewItem
 } from './elements';
 import { errorCodesToText } from './error-codes-to-text';
@@ -36,6 +36,7 @@ export const NewRecipeModal: React.FC<NewRecipeModalProps> = ({
 }) => {
     const [aisles] = useAisles();
     const [recipeName, setRecipeName] = useState<string>(editingRecipe?.name ?? '');
+    const [,{remove: removeGrocery}] = useGroceries();
     const [recipeIngredients, setRecipeIngredients] = useState<Ingredient[]>(editingRecipe?.ingredients ?? []);
     const [newIngredientName, setNewIngredientName] = useState<string>('');
     const [newIngredientAisle, setNewIngredientAisle] = useState<string>(_.get(aisles, 0));
@@ -127,7 +128,14 @@ export const NewRecipeModal: React.FC<NewRecipeModalProps> = ({
                         <IngredientWrapper key={name} onClick={() => editIngredient(name)}>
                             <IngredientName>{name.toLowerCase()}</IngredientName>
                             <IngredientAisle>{aisle}</IngredientAisle>
-                            <Close onClick={() => removeRecipeIngredient(name)}/>
+                            <Remove 
+                                onClick={(e) => {
+                                    e.stopPropagation();
+
+                                    removeRecipeIngredient(name);
+                                    if (name && recipeName) removeGrocery(name, recipeName);
+                                }}
+                            />
                         </IngredientWrapper>
                     )}
                 </RecipeIngredients>

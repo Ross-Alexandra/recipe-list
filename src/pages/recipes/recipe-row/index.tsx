@@ -25,6 +25,7 @@ import {
     PrimaryButton,
     SecondaryButton,
     INGREDIENT_ROW_HEIGHT,
+    AddAll,
 } from './elements';
 
 export interface RecipeRowProps {
@@ -39,11 +40,11 @@ export const RecipeRow: React.FC<RecipeRowProps> = ({name, ingredients, removeRe
     const [expanded, setExpanded] = useState(false);
     const [removeWarningDisplayed, setRemoveWarningDisplayed] = useState(false);
 
-    const onClickGarbageCan = useCallback((e: React.MouseEvent) => {
+    const onClickAddAll = useCallback((e: React.MouseEvent) => {
         e.stopPropagation();
 
-        setRemoveWarningDisplayed(true);
-    }, [setRemoveWarningDisplayed]);
+        ingredients.forEach(({name: groceryName, aisle}) => saveGrocery(groceryName, aisle, name));
+    }, [ingredients, saveGrocery]);
 
     const onClickEdit = useCallback((e: React.MouseEvent) => {
         e.stopPropagation();
@@ -51,12 +52,19 @@ export const RecipeRow: React.FC<RecipeRowProps> = ({name, ingredients, removeRe
         editRecipe(name);
     }, [name]);
 
+    const onClickGarbageCan = useCallback((e: React.MouseEvent) => {
+        e.stopPropagation();
+
+        setRemoveWarningDisplayed(true);
+    }, [setRemoveWarningDisplayed]);
+
     return (
         <RecipeWrapper>
             <RecipeHeader onClick={() => setExpanded(isExpanded => !isExpanded)}>
                 <Chevron expanded={expanded} stroke={'#FFF'} />
                 <RecipeTitle>{name}</RecipeTitle>
                 <RecipeHeaderIcons>
+                    <AddAll height={25} width={25} stroke={'#FFF'} onClick={onClickAddAll} />
                     <EditIcon stroke={'#FFF'} onClick={onClickEdit} />
                     <GarbageCan stroke={'#FFF'} onClick={onClickGarbageCan}/>
                 </RecipeHeaderIcons>
