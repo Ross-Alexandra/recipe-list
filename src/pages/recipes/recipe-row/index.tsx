@@ -75,11 +75,18 @@ export const RecipeRow: React.FC<RecipeRowProps> = ({name, ingredients, removeRe
             >
                 <IngredientsWrapper>
                     {ingredients.map(({name: ingredientName, aisle}, index) => 
-                        <Ingredient key={index}>
+                        <Ingredient
+                            key={index}
+                            onClick={() => {
+                                const included = groceries.map(({name}) => name).includes(ingredientName);
+                                if (included) removeGrocery(ingredientName);
+                                else saveGrocery(ingredientName, aisle, name);
+                            }}
+                        >
                             {groceries.map(({name}) => name).includes(ingredientName) ? (
-                                <RemoveFromList stroke={'#FFF'} onClick={() => removeGrocery(ingredientName)} />
+                                <RemoveFromList stroke={'#FFF'} />
                             ) : (
-                                <AddToList stroke={'#FFF'} onClick={() => saveGrocery(ingredientName, aisle, name)} />
+                                <AddToList stroke={'#FFF'} />
                             )}
                             <IngredientInfo>
                                 <IngredientName>{ingredientName}</IngredientName>
@@ -98,7 +105,12 @@ export const RecipeRow: React.FC<RecipeRowProps> = ({name, ingredients, removeRe
                     <WarningTitle>Really remove this recipe?</WarningTitle>
                     <ButtonsWrapper>
                         <PrimaryButton onClick={() => setRemoveWarningDisplayed(false)}>No</PrimaryButton>
-                        <SecondaryButton onClick={() => removeRecipe(name)}>Yes</SecondaryButton>
+                        <SecondaryButton onClick={() => {
+                            ingredients.forEach(({name: groceryName}) => removeGrocery(groceryName, name));
+                            removeRecipe(name);
+                        }}>
+                            Yes
+                        </SecondaryButton>
                     </ButtonsWrapper>
                 </ModalFrame>
             </Modal>

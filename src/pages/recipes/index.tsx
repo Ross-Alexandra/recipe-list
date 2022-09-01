@@ -21,6 +21,7 @@ export const Recipes: React.FC = () => {
         setEditingRecipe(name);
         setAddingNewRecipe(true);
     }, [setAddingNewRecipe]);
+    
     const closeModal = useCallback(() => {
         setEditingRecipe(undefined);
         setAddingNewRecipe(false);

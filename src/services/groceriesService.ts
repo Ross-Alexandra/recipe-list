@@ -18,8 +18,8 @@ export function useGroceries(): UseGroceries {
         return newGroceries;
     }, [setGroceries, saveGrocery]);
 
-    const _removeGrocery = useCallback((name: string) => {
-        const newGroceries = removeGrocery(name);
+    const _removeGrocery = useCallback((name: string, fromRecipe?: string) => {
+        const newGroceries = removeGrocery(name, fromRecipe);
 
         setGroceries(newGroceries);
         return newGroceries;
@@ -107,10 +107,22 @@ export function saveGrocery(name: string, aisle: string, from: string) {
     return currentGroceries;
 }
 
-export function removeGrocery(name: string) {
+export function removeGrocery(name: string, fromRecipe?: string) {
     const currentGroceries = getGroceries();
 
-    _.remove(currentGroceries, {name});
+    if (fromRecipe) {
+        const recipeToRemove = _.remove(currentGroceries, {name})?.[0];
+        if (!recipeToRemove) return currentGroceries;
+
+        if (recipeToRemove.usedBy.includes(fromRecipe) && recipeToRemove.usedBy.length > 1) {
+            currentGroceries.push({
+                ...recipeToRemove,
+                usedBy: recipeToRemove.usedBy.filter(usedBy => usedBy !== fromRecipe)
+            });
+        }
+    } else {
+        _.remove(currentGroceries, {name});
+    }
 
     window.localStorage.setItem('groceries', JSON.stringify(currentGroceries));
     return currentGroceries;
