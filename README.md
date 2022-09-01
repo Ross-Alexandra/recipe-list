@@ -15,4 +15,4 @@ to ensure that you will be able to develop with live reload (using `npm run star
  - Users like to click the 'save' button to add a new recipe intead of clicking the + icon,
  
 ## Known Bugs:
- - If an ingredient is added to the list, then the recipe for that ingredient is deleted, the ingredient *is not currently* deleted.
+ - ~~If an ingredient is added to the list, then the recipe for that ingredient is deleted, the ingredient is not currently deleted.~~
