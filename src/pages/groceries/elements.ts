@@ -18,7 +18,7 @@ export const ClearGroceriesButton = styled.div`
     ${ButtonCSS()}
 `;
 
-export const AddItemsToListWrapper = styled.div`
+export const GroceryFooter = styled.div`
     display: grid;
     place-items: center;
 
@@ -27,5 +27,5 @@ export const AddItemsToListWrapper = styled.div`
 `;
 
 export const AddItemsToListText = styled.p`
-    text-align: center;
+    text-align: center;    
 `;

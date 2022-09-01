@@ -6,7 +6,7 @@ import {
     GroceryHeader,
     TotalItemsText,
     ClearGroceriesButton,
-    AddItemsToListWrapper,
+    GroceryFooter,
     AddItemsToListText
 } from './elements';
 
@@ -21,10 +21,12 @@ export const Groceries: React.FC = () => {
     const checkedGroceriesCount = groceries.filter(({checked}) => checked).length;
     return (
         <>
-            <GroceryHeader>
-                <TotalItemsText>{`${checkedGroceriesCount} of ${groceries.length} checked`}</TotalItemsText>
-                <ClearGroceriesButton onClick={() => clearGroceries()}>Clear List</ClearGroceriesButton>
-            </GroceryHeader>
+            {groceries.length >= 1 && ( 
+                <GroceryHeader>
+                    <TotalItemsText>{`${checkedGroceriesCount} of ${groceries.length} checked`}</TotalItemsText>
+                    <ClearGroceriesButton onClick={() => clearGroceries()}>Clear List</ClearGroceriesButton>
+                </GroceryHeader>
+            )}
 
             {aisles.map(name => 
                 <AisleGroceries
@@ -36,13 +38,14 @@ export const Groceries: React.FC = () => {
                 />    
             )}
 
-            {groceries.length === 0 && (
-                <AddItemsToListWrapper>
+            <GroceryFooter>
+                {groceries.length === 0 && (
                     <AddItemsToListText>
                         Go to your recipies and select some ingredients to add to your list!
                     </AddItemsToListText>
-                </AddItemsToListWrapper>
-            )}
+                )}
+                
+            </GroceryFooter>
         </>
     );
 };
