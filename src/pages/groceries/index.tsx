@@ -35,6 +35,7 @@ export const Groceries: React.FC = () => {
                     groceries={groceries.filter(({aisle}) => aisle === name)}
                     checkGrocery={check}
                     uncheckGrocery={uncheck}
+                    removeGrocery={remove}
                 />    
             )}
 

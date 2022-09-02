@@ -4,6 +4,7 @@ import { sectionBackgroundColor, sectionBorderColor } from '../../../palette';
 import {
     CheckedBox,
     Chevron as _Chevron,
+    GarbageCan as _GarbageCan,
     UncheckedBox
 } from '../../../icons';
 import { Animate as _Animate } from '@ross-alexandra/react-utilities';
@@ -57,23 +58,31 @@ export const AisleTitle = styled.h3`
 
 export const AisleBody = styled.div`
     border-bottom: 1px solid ${sectionBorderColor};
-    background-color: ${sectionBackgroundColor};
-
-    padding: 0px 10px;
 `;
 
 export const GROCERY_ROW_HEIGHT = 70;
-export const GroceryRow = styled.div`
+export const GroceryRow = styled.div<{
+    checked: boolean;
+}>`
     display: flex;
     flex-direction: row;
     align-items: center;
 
+    padding: 0px 25px;
+
     height: ${GROCERY_ROW_HEIGHT}px;
+    background-color: ${sectionBackgroundColor};
     border-bottom: 1px dashed ${sectionBorderColor};
 
     :last-of-type {
         border-bottom: unset;
     }
+
+    ${({checked}) => checked ? `
+        opacity: 0.5;
+    ` : `
+        opacity: 1;
+    `}
 `;
 
 export const GroceryInfo = styled.div`
@@ -123,4 +132,10 @@ export const GroceryUsedBy = styled.p`
     opacity: 0.5;
     text-overflow: ellipsis;
     overflow: hidden;
+`;
+
+export const GarbageCan = styled(_GarbageCan)`
+    margin-left: auto;
+
+    cursor: pointer;
 `;

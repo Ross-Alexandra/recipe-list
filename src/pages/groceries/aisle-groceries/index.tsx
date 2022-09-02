@@ -15,6 +15,7 @@ import {
     GroceryUncheckedBox,
     GroceryName,
     GroceryUsedBy,
+    GarbageCan,
     GROCERY_ROW_HEIGHT
 } from './elements';
 import _ from 'lodash';
@@ -34,6 +35,7 @@ export interface AisleGroceriesProps {
     groceries: Grocery[];
     checkGrocery: (name: string) => Grocery[];
     uncheckGrocery: (name: string) => Grocery[];
+    removeGrocery: (name: string, from?: string) => Grocery[];
 }
 
 export const AisleGroceries: React.FC<AisleGroceriesProps> = ({
@@ -41,6 +43,7 @@ export const AisleGroceries: React.FC<AisleGroceriesProps> = ({
     groceries,
     checkGrocery,
     uncheckGrocery,
+    removeGrocery
 }) => {
     const [expanded, setExpanded] = useState(() => {
         return !groceries.every(({checked}) => checked);
@@ -70,7 +73,7 @@ export const AisleGroceries: React.FC<AisleGroceriesProps> = ({
             > 
                 <AisleBody>
                     {groceries.map(({name, usedBy, checked}) => 
-                        <GroceryRow key={name}>
+                        <GroceryRow key={name} checked={checked}>
                             {checked ? (
                                 <GroceryCheckedBox
                                     stroke={'#FFF'}
@@ -92,6 +95,8 @@ export const AisleGroceries: React.FC<AisleGroceriesProps> = ({
                                 <GroceryName>{name}</GroceryName>
                                 <GroceryUsedBy>{getAndMoreText(81, groceries.length, usedBy.join(', '))}</GroceryUsedBy>
                             </GroceryInfo>
+
+                            <GarbageCan stroke={'#FFF'} onClick={() => removeGrocery(name)}/>
                         </GroceryRow>
                     )}
                 </AisleBody>
