@@ -98,6 +98,19 @@ export const RecipeRow: React.FC<RecipeRowProps> = ({name, ingredients, removeRe
                 `}
             >
                 <IngredientsWrapper>
+                    <IngredientSummary>
+                        <IngredientInfo>
+                            <IngredientName >
+                                {noAddedIngredients && 'Add All'}
+                                {lessHalfIngredientsAdded && 'Add Remaining'}
+                                {moreHalfIngredientsAdded && 'Remove Remaining'}
+                                {allIngredientsAdded && 'Remove All'}
+                            </IngredientName>
+                            <IngredientAisle>{`${addedGroceries.length} / ${ingredients.length} items`}</IngredientAisle>
+                        </IngredientInfo>
+                        {(noAddedIngredients || lessHalfIngredientsAdded) && <AddToList stroke={'#FFF'} onClick={onClickAddAll}/>}
+                        {(allIngredientsAdded || moreHalfIngredientsAdded) && <RemoveFromList stroke={'#FFF'} onClick={onClickRemoveAll}/>}
+                    </IngredientSummary>
                     {ingredients.map(({name: ingredientName, aisle}, index) => 
                         <Ingredient
                             key={index}
@@ -118,19 +131,6 @@ export const RecipeRow: React.FC<RecipeRowProps> = ({name, ingredients, removeRe
                             )}
                         </Ingredient>
                     )}
-                    <IngredientSummary>
-                        <IngredientInfo>
-                            <IngredientName >
-                                {noAddedIngredients && 'Add All'}
-                                {lessHalfIngredientsAdded && 'Add Remaining'}
-                                {moreHalfIngredientsAdded && 'Remove Remaining'}
-                                {allIngredientsAdded && 'Remove All'}
-                            </IngredientName>
-                            <IngredientAisle>{`${addedGroceries.length} / ${ingredients.length} items`}</IngredientAisle>
-                        </IngredientInfo>
-                        {(noAddedIngredients || lessHalfIngredientsAdded) && <AddToList stroke={'#FFF'} onClick={onClickAddAll}/>}
-                        {(allIngredientsAdded || moreHalfIngredientsAdded) && <RemoveFromList stroke={'#FFF'} onClick={onClickRemoveAll}/>}
-                    </IngredientSummary>
                 </IngredientsWrapper>
             </Animate>
 

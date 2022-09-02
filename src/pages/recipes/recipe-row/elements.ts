@@ -145,7 +145,7 @@ export const RemoveFromList = styled(_RemoveFromList)`
 `;
 
 export const IngredientSummary = styled(Ingredient)`
-    border-top: 1px solid white;
+    border-bottom: 1px solid white;
 `;
 
 export const Modal = styled(_Modal)`
