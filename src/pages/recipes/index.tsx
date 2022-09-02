@@ -58,6 +58,7 @@ export const Recipes: React.FC = () => {
                 <NewRecipeModal 
                     closeModal={closeModal}
                     saveNewRecipe={saveNewRecipe}
+                    removeOldRecipe={() => editingRecipe && void removeRecipe(editingRecipe)}
                     editingRecipe={_.find(recipes, {name: editingRecipe})}
                 />                
             </Modal>

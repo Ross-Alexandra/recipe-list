@@ -52,7 +52,7 @@ export const RecipeTitle = styled.h3`
 
 export const RecipeHeaderIcons = styled.div`
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     margin-left: auto;
     place-items: end;
 
@@ -129,7 +129,7 @@ export const IngredientAisle = styled.p`
 `;
 
 export const AddToList = styled(_AddToList)`
-    margin-right: 10px;
+    margin-left: auto;
 
     flex-shrink: 0;
 
@@ -137,11 +137,15 @@ export const AddToList = styled(_AddToList)`
 `;
 
 export const RemoveFromList = styled(_RemoveFromList)`
-    margin-right: 10px;
+    margin-left: auto;
 
     flex-shrink: 0;
 
     cursor: pointer;
+`;
+
+export const IngredientSummary = styled(Ingredient)`
+    border-top: 1px solid white;
 `;
 
 export const Modal = styled(_Modal)`

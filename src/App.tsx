@@ -1,6 +1,8 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Redirect, Route, Switch, useLocation } from 'react-router-dom';
 import { setupIonicReact } from '@ionic/react';
+import {ScreenOrientation} from '@awesome-cordova-plugins/screen-orientation';
+import {AndroidFullScreen} from '@awesome-cordova-plugins/android-full-screen';
 import {keyframes} from '@emotion/react';
 
 import {
@@ -32,6 +34,16 @@ export const App: React.FC = () => {
 
     const location = useLocation();
     const currentPage: Page = location.pathname === '/recipes' ? 'recipes' : 'groceries'; 
+
+    // Setup app specific parameters.
+    useEffect(() => {
+        // Don't allow phone rotation.
+        ScreenOrientation.lock(ScreenOrientation.ORIENTATIONS.PORTRAIT_PRIMARY);
+
+        // Hide navigation & status bar
+        AndroidFullScreen.isImmersiveModeSupported()
+            .then(() => AndroidFullScreen.immersiveMode());
+    }, []);
 
     return (
         <AppWrapper>

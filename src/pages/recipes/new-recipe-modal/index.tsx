@@ -25,6 +25,7 @@ import { errorCodesToText } from './error-codes-to-text';
 
 export interface NewRecipeModalProps {
     closeModal: () => void;
+    removeOldRecipe: () => void;
     saveNewRecipe: (name: string, ingredients: Ingredient[]) => void;
     editingRecipe?: Recipe;
 }
@@ -32,6 +33,7 @@ export interface NewRecipeModalProps {
 export const NewRecipeModal: React.FC<NewRecipeModalProps> = ({
     closeModal,
     saveNewRecipe,
+    removeOldRecipe,
     editingRecipe
 }) => {
     const [aisles] = useAisles();
@@ -188,6 +190,10 @@ export const NewRecipeModal: React.FC<NewRecipeModalProps> = ({
 
                     if (_.some(Object.values(errors))) {
                         return;
+                    }
+
+                    if (editingRecipe && recipeName !== editingRecipe.name) {
+                        removeOldRecipe();
                     }
 
                     if (newIngredientName && recipeIngredients.every(({name}) => name !== newIngredientName)) {
