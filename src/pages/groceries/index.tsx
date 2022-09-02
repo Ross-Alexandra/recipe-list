@@ -43,9 +43,16 @@ export const Groceries: React.FC = () => {
         if (!newGroceryName) {
             newError('name', 'is-blank');
             return;
-        } 
 
-        save(newGroceryName, newGroceryAisle, '');
+        } 
+        const groceryName = newGroceryName.toLowerCase();
+        if (_.find(groceries, {name: groceryName, usedBy: ['Manually Added']})) {
+            newError('name', 'already-manually-added');
+            return;
+        }
+
+        const recipeName = _.find(groceries, {name: groceryName}) ? 'Manually Added' : '';
+        save(groceryName, newGroceryAisle, recipeName);
         setCreatingGrocery(false);
         setNewGroceryName('');
         setNewGroceryAisle(_.get(aisles, 0));
