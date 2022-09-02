@@ -45,6 +45,7 @@ export const GroceryFooter = styled.div`
 `;
 
 export const AddItemsToListText = styled.p`
+    font-size: 17px;
     text-align: center;    
 `;
 
@@ -63,10 +64,20 @@ export const AisleSelector = styled.select`
     text-transform: capitalize;
     background-color: ${sectionBackgroundColor};
     color: white;
+
+    height: 40px;
+    padding-left: 15px;
+    outline: none;
+    border: 1px solid ${sectionBorderColor};
 `;
 
 export const SaveButton = styled.div`
     ${ButtonCSS()}
+`;
+
+export const ErrorText = styled.p`
+    color: red;
+    font-size: 11px;
 `;
 
 export const Modal = styled(_Modal)`
@@ -80,11 +91,35 @@ export const Modal = styled(_Modal)`
     }
 `;
 
-export const ModalFrame = styled(_ModalFrame)`
+export const NewGroceryModalFrame = styled(_ModalFrame)`
     margin: 15px;
     padding: 15px;
     display: grid;
     grid-template-rows: repeat(4, 1fr);
 
     gap: 15px;
+`;
+
+export const ClearWarningModalFrame = styled(_ModalFrame)`
+    margin: 15px;
+    padding: 15px;
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+    place-items: center;
+
+    gap: 15px;
+`;
+
+export const ClearButtonsWrapper = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 75%;
+`;
+
+export const ClearButton = styled.div`
+    ${ButtonCSS()}
+    width: 25%;
 `;

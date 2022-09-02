@@ -1,5 +1,7 @@
 import _ from 'lodash';
 import React, { useCallback, useState } from 'react';
+import { errorCodesToText } from '../../error-codes-to-text';
+import { useFieldErrors } from '../../hooks';
 import { useAisles, useGroceries } from '../../services';
 import { AisleGroceries } from './aisle-groceries';
 
@@ -16,18 +18,33 @@ import {
     AisleSelector,
     SaveButton,
     Modal,
-    ModalFrame,
+    ErrorText,
+    NewGroceryModalFrame,
+    ClearWarningModalFrame,
+    ClearButton,
+    ClearButtonsWrapper
 } from './elements';
 
 export const Groceries: React.FC = () => {
     const [aisles] = useAisles();
     const [groceries, {save, remove, check, uncheck}] = useGroceries();
 
+    const [clearingGroceries, setClearingGroceries] = useState(false);
+
     const [creatingGrocery, setCreatingGrocery] = useState(false);
     const [newGroceryName, setNewGroceryName] = useState('');
     const [newGroceryAisle, setNewGroceryAisle] = useState(_.get(aisles, 0));
+    const [newGroceryErrors, {
+        newError,
+        clearFieldErrors
+    }] = useFieldErrors<{name: string[], aisle: string[]}>();
 
     const saveNewGrocery = useCallback(() => {
+        if (!newGroceryName) {
+            newError('name', 'is-blank');
+            return;
+        } 
+
         save(newGroceryName, newGroceryAisle, '');
         setCreatingGrocery(false);
         setNewGroceryName('');
@@ -48,7 +65,7 @@ export const Groceries: React.FC = () => {
                 </TotalItemsText>
                 <ButtonsWrapper>
                     <AddGroceryButton onClick={() => setCreatingGrocery(true)}>New Item</AddGroceryButton>
-                    <ClearGroceriesButton onClick={() => clearGroceries()}>Clear List</ClearGroceriesButton>
+                    <ClearGroceriesButton onClick={() => setClearingGroceries(true)}>Clear List</ClearGroceriesButton>
                 </ButtonsWrapper>
             </GroceryHeader>
 
@@ -66,7 +83,7 @@ export const Groceries: React.FC = () => {
             <GroceryFooter>
                 {groceries.length === 0 && (
                     <AddItemsToListText>
-                        Go to your recipies and select some ingredients to add to your list!
+                        Open your recipies and select some ingredients to add to your list!
                     </AddItemsToListText>
                 )}
                 
@@ -76,20 +93,25 @@ export const Groceries: React.FC = () => {
                 isOpen={creatingGrocery}
                 onBackgroundClick={() => setCreatingGrocery(false)}
             >
-                <ModalFrame
+                <NewGroceryModalFrame
                     closeButtonColor='#FFF'
                     handleClose={() => setCreatingGrocery(false)}
                 >
                     <ModalTitle>New Grocery Item</ModalTitle>
-                    <GroceryNameInput 
-                        type="text"
-                        placeholder='Item Name'
-                        value={newGroceryName}
-                        hasError={false}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                            setNewGroceryName(e.target.value);
-                        }}
-                    />
+                    <div>
+                        <GroceryNameInput 
+                            type="text"
+                            placeholder='Item Name'
+                            value={newGroceryName}
+                            hasError={false}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                setNewGroceryName(e.target.value);
+                                clearFieldErrors('name');
+                            }}
+                        />
+                        {newGroceryErrors.name && <ErrorText>{_.get(errorCodesToText, newGroceryErrors.name?.[0])}</ErrorText>}
+                    </div>
+
                     <AisleSelector
                         value={newGroceryAisle}
                         onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -101,7 +123,30 @@ export const Groceries: React.FC = () => {
                         )}
                     </AisleSelector>
                     <SaveButton onClick={saveNewGrocery}>Save</SaveButton>
-                </ModalFrame>
+                </NewGroceryModalFrame>
+            </Modal>
+
+            <Modal
+                isOpen={clearingGroceries}
+                onBackgroundClick={() => setClearingGroceries(false)}
+            >
+                <ClearWarningModalFrame
+                    closeButtonColor='#FFF'
+                    handleClose={() => setClearingGroceries(false)}
+                >
+                    <ModalTitle>Clear all items from list?</ModalTitle>
+                    <ClearButtonsWrapper>
+                        <ClearButton
+                            onClick={() => {
+                                clearGroceries();
+                                setClearingGroceries(false);
+                            }}
+                        >
+                            Yes
+                        </ClearButton>
+                        <ClearButton onClick={() => setClearingGroceries(false)}>No</ClearButton>
+                    </ClearButtonsWrapper>
+                </ClearWarningModalFrame>
             </Modal>
         </>
     );

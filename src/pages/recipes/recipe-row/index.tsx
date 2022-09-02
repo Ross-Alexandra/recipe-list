@@ -141,13 +141,13 @@ export const RecipeRow: React.FC<RecipeRowProps> = ({name, ingredients, removeRe
                 <ModalFrame closeButtonColor='#FFF' handleClose={() => setRemoveWarningDisplayed(false)}>
                     <WarningTitle>Really remove this recipe?</WarningTitle>
                     <ButtonsWrapper>
-                        <PrimaryButton onClick={() => setRemoveWarningDisplayed(false)}>No</PrimaryButton>
                         <SecondaryButton onClick={() => {
                             ingredients.forEach(({name: groceryName}) => removeGrocery(groceryName, name));
                             removeRecipe(name);
                         }}>
                             Yes
                         </SecondaryButton>
+                        <PrimaryButton onClick={() => setRemoveWarningDisplayed(false)}>No</PrimaryButton>
                     </ButtonsWrapper>
                 </ModalFrame>
             </Modal>

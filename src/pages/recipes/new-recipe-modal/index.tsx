@@ -2,6 +2,7 @@ import _ from 'lodash';
 import React, { useCallback, useState } from 'react';
 import { FieldError, useFieldErrors } from '../../../hooks';
 import { useAisles, useGroceries } from '../../../services';
+import { errorCodesToText } from '../../../error-codes-to-text';
 
 import {
     ModalFrame,
@@ -21,7 +22,6 @@ import {
     Remove,
     NewItem
 } from './elements';
-import { errorCodesToText } from './error-codes-to-text';
 
 export interface NewRecipeModalProps {
     closeModal: () => void;
