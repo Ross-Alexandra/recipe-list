@@ -28,7 +28,7 @@ export const Groceries: React.FC = () => {
     const [newGroceryAisle, setNewGroceryAisle] = useState(_.get(aisles, 0));
 
     const saveNewGrocery = useCallback(() => {
-        save(newGroceryName, newGroceryAisle, 'Manual');
+        save(newGroceryName, newGroceryAisle, '');
         setCreatingGrocery(false);
         setNewGroceryName('');
         setNewGroceryAisle(_.get(aisles, 0));
