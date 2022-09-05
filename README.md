@@ -12,3 +12,4 @@ to ensure that you will be able to develop with live reload (using `npm run star
   require users to remember what comes after the ellipsis).
 
 ## Known Bugs:
+ - Long grocery names will push the garbage can icon slightly ('Canned Tomatoes (500ml)' for example)
