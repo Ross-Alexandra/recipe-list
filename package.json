@@ -60,7 +60,8 @@
     "start:web": "ionic serve",
     "start:android": "ionic capacitor run android -l --external -c -s",
     "build:web": "npm run build",
-    "build:android": "ionic capacitor copy android"
+    "build:android": "ionic capacitor build",
+    "install:android": "ionic capacitor copy android"
   },
   "eslintConfig": {
     "extends": [
