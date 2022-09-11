@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { sectionBackgroundColor, sectionBorderColor } from '../../../palette';
+import { backgroundColor, sectionBackgroundColor, sectionBorderColor } from '../../../palette';
 
 import {
     CheckedBox,
@@ -7,7 +7,10 @@ import {
     GarbageCan as _GarbageCan,
     UncheckedBox
 } from '../../../icons';
-import { Animate as _Animate } from '@ross-alexandra/react-utilities';
+import {
+    Animate as _Animate,
+    Modal as _Modal, 
+} from '@ross-alexandra/react-utilities';
 
 export const Animate = styled(_Animate)`
     overflow: hidden;
@@ -74,6 +77,8 @@ export const GroceryRow = styled.div<{
     background-color: ${sectionBackgroundColor};
     border-bottom: 1px dashed ${sectionBorderColor};
 
+    cursor: pointer;
+
     :last-of-type {
         border-bottom: unset;
     }
@@ -136,6 +141,26 @@ export const GroceryUsedBy = styled.p`
 
 export const GarbageCan = styled(_GarbageCan)`
     margin-left: auto;
+    flex-shrink: 0;
+    mix-width: 0px;
 
     cursor: pointer;
+`;
+
+export const Modal = styled(_Modal)`
+    .modal {
+        background-color: ${backgroundColor};
+        width: 75vw;
+    }
+
+    .modal-background {
+        background-color: rgba(0, 0, 0, .75);
+    }
+`;
+
+export const LongNameText = styled.h3`
+    padding: 15px 25px;
+
+    text-transform: capitalize;
+    text-align: center;
 `;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import {keyframes} from '@emotion/react';
 
 import {
@@ -16,7 +16,9 @@ import {
     GroceryName,
     GroceryUsedBy,
     GarbageCan,
-    GROCERY_ROW_HEIGHT
+    GROCERY_ROW_HEIGHT,
+    Modal,
+    LongNameText
 } from './elements';
 import _ from 'lodash';
 
@@ -49,6 +51,11 @@ export const AisleGroceries: React.FC<AisleGroceriesProps> = ({
         return !groceries.every(({checked}) => checked);
     });
 
+    const [nameModalOpen, setNameModalOpen] = useState('');
+    const openNameModal = useCallback((name) => setNameModalOpen(name), [setNameModalOpen]);
+    const closeNameModal = useCallback(() => setNameModalOpen(''), [setNameModalOpen]);
+    console.log(nameModalOpen);    
+
     const checkedItemCount = groceries.filter(({checked}) => checked).length;
 
     if (_.isEmpty(groceries)) return null;
@@ -73,31 +80,40 @@ export const AisleGroceries: React.FC<AisleGroceriesProps> = ({
             > 
                 <AisleBody>
                     {groceries.map(({name, usedBy, checked}) => 
-                        <GroceryRow key={name} checked={checked}>
-                            {checked ? (
-                                <GroceryCheckedBox
-                                    stroke={'#FFF'}
-                                    onClick={() => {
-                                        if (checked) uncheckGrocery(name);
-                                        else checkGrocery(name);
-                                    }}    
-                                />
-                            ) : (
-                                <GroceryUncheckedBox
-                                    stroke={'#FFF'}
-                                    onClick={() => {
-                                        if (checked) uncheckGrocery(name);
-                                        else checkGrocery(name);
-                                    }}    
-                                />
-                            )}
-                            <GroceryInfo>
-                                <GroceryName>{name}</GroceryName>
-                                <GroceryUsedBy>{getAndMoreText(81, groceries.length, usedBy.join(', '))}</GroceryUsedBy>
-                            </GroceryInfo>
+                        <>
+                            <GroceryRow key={name} checked={checked} onClick={() => openNameModal(name)}>
+                                {checked ? (
+                                    <GroceryCheckedBox
+                                        stroke={'#FFF'}
+                                        onClick={() => {
+                                            if (checked) uncheckGrocery(name);
+                                            else checkGrocery(name);
+                                        }}    
+                                    />
+                                ) : (
+                                    <GroceryUncheckedBox
+                                        stroke={'#FFF'}
+                                        onClick={() => {
+                                            if (checked) uncheckGrocery(name);
+                                            else checkGrocery(name);
+                                        }}    
+                                    />
+                                )}
+                                <GroceryInfo>
+                                    <GroceryName>{name}</GroceryName>
+                                    <GroceryUsedBy>{getAndMoreText(81, groceries.length, usedBy.join(', '))}</GroceryUsedBy>
+                                </GroceryInfo>
 
-                            <GarbageCan stroke={'#FFF'} onClick={() => removeGrocery(name)}/>
-                        </GroceryRow>
+                                <GarbageCan stroke={'#FFF'} onClick={() => removeGrocery(name)}/>
+                            </GroceryRow>
+                            <Modal 
+                                isOpen={nameModalOpen === name}
+                                onBackgroundClick={closeNameModal}
+                                onClick={closeNameModal}
+                            >
+                                <LongNameText>{name}</LongNameText>
+                            </Modal>
+                        </>
                     )}
                 </AisleBody>
             </Animate>

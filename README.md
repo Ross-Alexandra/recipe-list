@@ -8,8 +8,8 @@ to ensure that you will be able to develop with live reload (using `npm run star
 
 ## Known UX issues:
 - Users need to be able to be able to see a list of recipes they are making for the week
-- Users need to be able to click on groceries to see the full title (so ellipsis doesn't 
-  require users to remember what comes after the ellipsis).
+- ~~Users need to be able to click on groceries to see the full title (so ellipsis doesn't~~ 
+  ~~require users to remember what comes after the ellipsis).~~
 
 ## Known Bugs:
- - Long grocery names will push the garbage can icon slightly ('Canned Tomatoes (500ml)' for example)
+ - ~~Long grocery names will push the garbage can icon slightly ('Canned Tomatoes (500ml)' for example)~~
