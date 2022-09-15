@@ -28,6 +28,7 @@ import {
     NewItem
 } from './elements';
 import { accentColor, navigationBackgroundColor } from './palette';
+import { useCustomEventDispatcher } from './hooks/useCustomEvent';
 
 setupIonicReact();
 
@@ -45,6 +46,8 @@ export const App: React.FC = () => {
     const handleClosePopout = useCallback(() => setPopoutIsOpen(false), [setPopoutIsOpen]);
     const handleOpenPopout = useCallback(() => setPopoutIsOpen(true), [setPopoutIsOpen]);
 
+    const dispatchHelloWorldEvent = useCustomEventDispatcher<{msg: string}>('hello-world');
+
     const location = useLocation();
     const currentPage = getCurrentPage(location.pathname); 
 
@@ -61,6 +64,8 @@ export const App: React.FC = () => {
 
         // NavigationBar provided by cordova-plugin-navigationbar-color
         window?.NavigationBar?.backgroundColorByHexString?.(navigationBackgroundColor, false);
+
+        dispatchHelloWorldEvent({msg: currentPage});
     }, [currentPage]);
 
     return (

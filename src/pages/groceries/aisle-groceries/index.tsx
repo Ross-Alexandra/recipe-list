@@ -54,7 +54,6 @@ export const AisleGroceries: React.FC<AisleGroceriesProps> = ({
     const [nameModalOpen, setNameModalOpen] = useState('');
     const openNameModal = useCallback((name) => setNameModalOpen(name), [setNameModalOpen]);
     const closeNameModal = useCallback(() => setNameModalOpen(''), [setNameModalOpen]);
-    console.log(nameModalOpen);    
 
     const checkedItemCount = groceries.filter(({checked}) => checked).length;
 
