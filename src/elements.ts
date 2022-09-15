@@ -1,8 +1,11 @@
 import styled from '@emotion/styled';
 import { Modal } from '@ross-alexandra/react-utilities';
 import { Link } from 'react-router-dom';
-import { HamburgerMenu } from './icons';
-import { backgroundColor, sectionBackgroundColor, sectionBorderColor } from './palette';
+import {
+    HamburgerMenu,
+    NewItemFilled as _NewItem
+} from './icons';
+import { accentColor, backgroundColor, navigationBackgroundColor, sectionBackgroundColor, sectionBorderColor } from './palette';
 
 export const AppWrapper = styled.div`
     display: flex;
@@ -12,7 +15,6 @@ export const AppWrapper = styled.div`
     box-sizing: border-box;
     height: 100vh;
     width: 100vw;
-    padding-top: 20px;
 
     overflow: hidden;
 
@@ -20,10 +22,19 @@ export const AppWrapper = styled.div`
     background-color: ${backgroundColor};
 `;
 
-export const AppTitle = styled.h1`
-    margin: 0px 0px 20px 0px;
+export const AppTitle = styled.h1<{
+    page: Page;
+}>`
+    box-sizing: border-box;
+    padding: 20px 0px 0px 10px;
+    margin-bottom: 20px;
 
     text-transform: uppercase;
+    width: 100%;
+    text-align: left;
+
+    background-color: ${({page}) => accentColor(page)};
+    border-bottom: 1px solid ${sectionBorderColor};
 `;
 
 export const AppBodyOuter = styled.div`
@@ -59,7 +70,7 @@ export const TabTray = styled.div`
     align-items: center;
 
     border-top: 1px solid ${sectionBorderColor};
-    background-color: ${sectionBackgroundColor};
+    background-color: ${navigationBackgroundColor};
 `;
 
 export const Tab = styled(Link)<{activePage: boolean}>`
@@ -70,18 +81,11 @@ export const Tab = styled(Link)<{activePage: boolean}>`
 
     height: 100%;
     flex: 1 1 0px;
-    border-right: 1px solid ${sectionBorderColor};
 
     text-decoration: none;
     color: unset;
 
-    :last-of-type {
-        border-right: unset;
-    }
-
-    ${({activePage}) => activePage && `
-        background-color: ${sectionBackgroundColor};
-    `}
+    -webkit-tap-highlight-color: transparent;
 `;
 
 export const TabText = styled.h3`
@@ -115,4 +119,13 @@ export const AppPopout = styled(Modal)`
         right: 0px;
         left: 0px;
     }
+`;
+
+export const NewItem = styled(_NewItem)`
+    position: relative;    
+
+    overflow: visible;
+    margin: 0px 10% 20px auto;
+
+    //background: radial-gradient(#DDD 50%, transparent 51%);
 `;

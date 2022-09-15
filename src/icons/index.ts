@@ -6,6 +6,8 @@ export * from './edit';
 export * from './garbage-can';
 export * from './groceries';
 export * from './hamburger-menu';
+export * from './meals';
+export * from './new-item-filled';
 export * from './new-item';
 export * from './recipes';
 export * from './remove-from-list';

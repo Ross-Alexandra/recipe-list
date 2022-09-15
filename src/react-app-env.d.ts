@@ -1,6 +1,6 @@
 /// <reference types="react-scripts" />
 
-type Page = 'recipes' | 'groceries';
+type Page = 'recipes' | 'groceries' | 'meals';
 
 interface Recipe {
     name: string;
@@ -18,3 +18,9 @@ interface Grocery {
     usedBy: string[];
     checked: boolean;
 }
+
+interface Window {
+    //eslint-disable-next-line @typescript-eslint/no-explicit-any
+    NavigationBar: any;
+}
+

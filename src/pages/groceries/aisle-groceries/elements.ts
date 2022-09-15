@@ -17,6 +17,11 @@ export const Animate = styled(_Animate)`
 `;
 
 export const AisleWrapper = styled.div`
+    border-bottom: 1px solid ${sectionBorderColor};
+
+    :last-of-type {
+        border-bottom: unset;
+    }
 `;
 
 export const AisleHeader = styled.div`
@@ -25,8 +30,6 @@ export const AisleHeader = styled.div`
     align-items: center;
 
     height: 65px;
-
-    border-bottom: 1px solid ${sectionBorderColor};
 `;
 
 export const Chevron = styled(_Chevron)<{

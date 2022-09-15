@@ -87,14 +87,13 @@ export const Groceries: React.FC = () => {
                 />    
             )}
 
-            <GroceryFooter>
-                {groceries.length === 0 && (
+            {groceries.length === 0 && (
+                <GroceryFooter>
                     <AddItemsToListText>
                         Open your recipies and select some ingredients to add to your list!
                     </AddItemsToListText>
-                )}
-                
-            </GroceryFooter>
+                </GroceryFooter>
+            )}
 
             <Modal
                 isOpen={creatingGrocery}
