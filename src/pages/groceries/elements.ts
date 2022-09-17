@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { backgroundColor, ButtonCSS, sectionBackgroundColor, sectionBorderColor, TextInputCSS } from '../../palette';
+import { backgroundColor, ButtonCSS, contentObscureBackgroundColor, sectionBackgroundColor, sectionBorderColor, TextInputCSS } from '../../palette';
 import {
     Modal as _Modal,
     ModalFrame as _ModalFrame
@@ -87,7 +87,7 @@ export const Modal = styled(_Modal)`
     }
 
     .modal-background {
-        background-color: rgba(0, 0, 0, .75);
+        background-color: ${contentObscureBackgroundColor};
     }
 `;
 

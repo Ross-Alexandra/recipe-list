@@ -3,9 +3,8 @@ import { Modal } from '@ross-alexandra/react-utilities';
 import { Link } from 'react-router-dom';
 import {
     HamburgerMenu,
-    NewItemFilled as _NewItem
 } from './icons';
-import { accentColor, backgroundColor, navigationBackgroundColor, sectionBackgroundColor, sectionBorderColor } from './palette';
+import { accentColor, backgroundColor, contentObscureBackgroundColor, navigationBackgroundColor, sectionBackgroundColor, sectionBorderColor } from './palette';
 
 export const AppWrapper = styled.div`
     display: flex;
@@ -43,7 +42,7 @@ export const AppBodyOuter = styled.div`
     width: 100%;
     flex-grow: 1;
 
-    margin-bottom: 20px;
+    margin-bottom: 60px;
     overflow: hidden;
 `;
 
@@ -86,6 +85,13 @@ export const Tab = styled(Link)<{activePage: boolean}>`
     color: unset;
 
     -webkit-tap-highlight-color: transparent;
+
+    box-sizing: border-box;
+    ${({activePage}) => activePage ? `
+        border-top: 1px solid white
+    ` : `
+        padding-top: 1px;
+    `};
 `;
 
 export const TabText = styled.h3`
@@ -118,14 +124,7 @@ export const AppPopout = styled(Modal)`
         bottom: 0px;
         right: 0px;
         left: 0px;
+
+        background-color: ${contentObscureBackgroundColor};
     }
-`;
-
-export const NewItem = styled(_NewItem)`
-    position: relative;    
-
-    overflow: visible;
-    margin: 0px 10% 20px auto;
-
-    //background: radial-gradient(#DDD 50%, transparent 51%);
 `;

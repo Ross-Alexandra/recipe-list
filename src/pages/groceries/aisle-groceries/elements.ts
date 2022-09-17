@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { backgroundColor, sectionBackgroundColor, sectionBorderColor } from '../../../palette';
+import { backgroundColor, contentObscureBackgroundColor, sectionBackgroundColor, sectionBorderColor } from '../../../palette';
 
 import {
     CheckedBox,
@@ -157,7 +157,7 @@ export const Modal = styled(_Modal)`
     }
 
     .modal-background {
-        background-color: rgba(0, 0, 0, .75);
+        background-color: ${contentObscureBackgroundColor};
     }
 `;
 

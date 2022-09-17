@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { backgroundColor, sectionBorderColor } from '../../palette';
+import { backgroundColor, contentObscureBackgroundColor, sectionBorderColor } from '../../palette';
 import {
     Modal as _Modal
 } from '@ross-alexandra/react-utilities';
@@ -41,6 +41,6 @@ export const Modal = styled(_Modal)`
     }
 
     .modal-background {
-        background-color: rgba(0, 0, 0, 0.75);
+        background-color: ${contentObscureBackgroundColor};
     }
 `;

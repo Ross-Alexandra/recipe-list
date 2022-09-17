@@ -4,6 +4,7 @@ export const backgroundColor = '#1c1b22';
 export const navigationBackgroundColor = '#222128';
 export const sectionBackgroundColor = 'rgba(255, 255, 255, 0.1)';
 export const sectionBorderColor = 'rgba(255, 255, 255, 0.15)';
+export const contentObscureBackgroundColor = 'rgba(0, 0, 0, .75)';
 
 export const accentColor = (page: Page) => {
     switch (page) {

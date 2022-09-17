@@ -17,6 +17,10 @@ import {
 } from './pages';
 
 import {
+    AddNewItem
+} from './components';
+
+import {
     AppWrapper,
     AppTitle,
     HamburgerMenuIcon,
@@ -25,7 +29,6 @@ import {
     TabTray,
     Tab,
     AppPopout,
-    NewItem
 } from './elements';
 import { accentColor, navigationBackgroundColor } from './palette';
 import { useCustomEventDispatcher } from './hooks/useCustomEvent';
@@ -103,7 +106,7 @@ export const App: React.FC = () => {
                 </AppBodyInner>
             </AppBodyOuter>
 
-            <NewItem stroke={'#FFF'} width={40} height={40} />
+            <AddNewItem currentPage={currentPage}/>
 
             <TabTray>
                 <Tab to='/recipes' activePage={currentPage === 'recipes'}>
@@ -116,7 +119,7 @@ export const App: React.FC = () => {
                     <MealsIcon width={28} height={28} stroke={currentPage === 'meals' ? '#FFF' : '#777'} />
                 </Tab>
             </TabTray>
-
+            
             <AppPopout
                 portalId='app-menu'
                 isOpen={popoutIsOpen}
