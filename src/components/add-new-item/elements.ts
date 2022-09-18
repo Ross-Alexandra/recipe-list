@@ -52,7 +52,8 @@ export const Modal = styled(_Modal)`
 `;
 
 export const MainButonAlternate = styled.div`
-    color: black;
+    height: 15px;
+    width: 15px;
 `;
 
 export const ModalContentWrapper = styled.div`
@@ -102,6 +103,7 @@ export const ModalItemIcon = styled.div<{
     border-radius: 50%;
 
     color: black;
+    cursor: pointer;
 
     animation-name: ${keyframes`
         from {opacity: 0}

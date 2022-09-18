@@ -1,8 +1,10 @@
 import { keyframes } from '@emotion/react';
 import { Animate } from '@ross-alexandra/react-utilities';
 import React, { useCallback, useState } from 'react';
-import { GroceriesIcon, MealsIcon, RecipesIcon } from '../../icons';
 import { backgroundColor } from '../../palette';
+
+import { useCustomEventDispatcher } from '../../hooks';
+
 import {
     NewItemWrapper,
     NewItem,
@@ -13,14 +15,15 @@ import {
     ModalItemIcon,
 } from './elements';
 
-function primaryIcon(currentPage: Page) {
-    switch (currentPage) {
-        case 'groceries': return GroceriesIcon;
-        case 'recipes': return RecipesIcon;
-        case 'meals': return MealsIcon;
-        default: return GroceriesIcon;
-    }
-}
+import {
+    getAlternateButtonTitles,
+    getAlternateIcons,
+    getAlternateOnClicks,
+    getPrimaryButtonTitle,
+    getPrimaryIcon,
+    getPrimaryOnClick
+} from './helpers';
+import { useHistory } from 'react-router';
 
 export interface AddNewItemProps {
     currentPage: Page;
@@ -30,20 +33,72 @@ export const AddNewItem: React.FC<AddNewItemProps> = ({currentPage}) => {
     const [overlayActive, setOverlayActive] = useState(false);
     const [hidePlus, setHidePlus] = useState(false);
 
+    const history = useHistory();
+    const newRecipeDispatch = useCustomEventDispatcher('new-recipe');
+    const newGroceryDispatch = useCustomEventDispatcher('new-grocery');
+    const newMealDispatch = useCustomEventDispatcher('new-meal');
+
+    const newRecipe = useCallback(() => {
+        history.push('/recipes');
+
+        setTimeout(() => {
+            newRecipeDispatch();
+        }, 250);
+    }, [history, newRecipeDispatch]);
+    
+    const newGrocery = useCallback(() => {
+        history.push('/groceries');
+
+        setTimeout(() => {
+            newGroceryDispatch();
+        }, 250);
+    }, [history, newGroceryDispatch]);
+
+    const newMeal = useCallback(() => {
+        history.push('/meals');
+
+        setTimeout(() => {
+            newMealDispatch();
+        }, 250);
+    }, [history, newMealDispatch]);
+
+    const eventDispatchers = {
+        'recipes': newRecipe,
+        'groceries': newGrocery,
+        'meals': newMeal
+    };
+
+    const PrimaryIcon = getPrimaryIcon(currentPage);
+    const alternateIcons = getAlternateIcons(currentPage);
+
+    const primaryTitle = getPrimaryButtonTitle(currentPage);
+    const alternateTitles = getAlternateButtonTitles(currentPage);
+
+    const primaryOnClick = getPrimaryOnClick(currentPage);
+    const alternateOnClicks = getAlternateOnClicks(currentPage);
+
     const openOverlay = useCallback(() => {
         setOverlayActive(true);
         setHidePlus(true);
     }, [setOverlayActive]);
+
     const closeOverlay = useCallback(() => {
         setOverlayActive(false);
     }, [setOverlayActive]);
 
-    const PrimaryIcon = primaryIcon(currentPage);
+    const toggleOverlay = useCallback(() => {
+        if (overlayActive) {
+            closeOverlay();
+            eventDispatchers[primaryOnClick]?.();
+        }
+        else openOverlay();
+    }, [overlayActive, closeOverlay, openOverlay, primaryOnClick]);
+
     return (
         <>
             <NewItemWrapper 
                 overlayOpen={overlayActive}
-                onClick={openOverlay}
+                onClick={toggleOverlay}
             >
                 <Animate
                     display={overlayActive}
@@ -58,7 +113,7 @@ export const AddNewItem: React.FC<AddNewItemProps> = ({currentPage}) => {
                     afterAnimateOut={() => setHidePlus(false)}
                 >
                     <MainButonAlternate>
-                        <PrimaryIcon width={15} height={15}/>
+                        {PrimaryIcon}
                     </MainButonAlternate>
                 </Animate>
 
@@ -80,11 +135,21 @@ export const AddNewItem: React.FC<AddNewItemProps> = ({currentPage}) => {
                 <ModalContentWrapper
                     onClick={closeOverlay}
                 >
-                    <ModalItemName index={2}>Name 1</ModalItemName>
-                    <ModalItemIcon index={2}>1</ModalItemIcon>
-                    <ModalItemName index={1}>Name 2</ModalItemName>
-                    <ModalItemIcon index={1}>2</ModalItemIcon>
-                    <ModalItemName index={0}>Name 3</ModalItemName>
+                    <ModalItemName index={2}>{alternateTitles[0]}</ModalItemName>
+                    <ModalItemIcon
+                        index={2}
+                        onClick={() => eventDispatchers[alternateOnClicks[0]]?.()}
+                    >
+                        {alternateIcons[0]}
+                    </ModalItemIcon>
+                    <ModalItemName index={1}>{alternateTitles[1]}</ModalItemName>
+                    <ModalItemIcon
+                        index={1}
+                        onClick={() => eventDispatchers[alternateOnClicks[1]]?.()}
+                    >
+                        {alternateIcons[1]}
+                    </ModalItemIcon>
+                    <ModalItemName index={0}>{primaryTitle}</ModalItemName>
                 </ModalContentWrapper>
             </Modal>
         </>

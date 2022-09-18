@@ -1,8 +1,7 @@
 import _ from 'lodash';
 import React, { useCallback, useState } from 'react';
 import { errorCodesToText } from '../../error-codes-to-text';
-import { useFieldErrors } from '../../hooks';
-import { CustomEventHandler, useCustomEventHandler } from '../../hooks/useCustomEvent';
+import { useCustomEventHandler, useFieldErrors } from '../../hooks';
 import { useAisles, useGroceries } from '../../services';
 import { AisleGroceries } from './aisle-groceries';
 
@@ -30,11 +29,6 @@ export const Groceries: React.FC = () => {
     const [aisles] = useAisles();
     const [groceries, {save, remove, check, uncheck}] = useGroceries();
 
-    const helloWorldHandler: CustomEventHandler<{msg: string}> = useCallback((e: CustomEvent<{msg: string}>) => {
-        console.log(e.detail.msg);
-    }, []);
-    useCustomEventHandler<{msg: string}>('hello-world', helloWorldHandler);
-
     const [clearingGroceries, setClearingGroceries] = useState(false);
 
     const [creatingGrocery, setCreatingGrocery] = useState(false);
@@ -44,6 +38,12 @@ export const Groceries: React.FC = () => {
         newError,
         clearFieldErrors
     }] = useFieldErrors<{name: string[], aisle: string[]}>();
+
+    const handleNewGroceryEvent = useCallback(() => {
+        console.log('handling new grocery event');
+        setCreatingGrocery(true);
+    }, [setCreatingGrocery]);
+    useCustomEventHandler('new-grocery', handleNewGroceryEvent);
 
     const saveNewGrocery = useCallback(() => {
         if (!newGroceryName) {

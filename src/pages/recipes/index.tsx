@@ -11,6 +11,7 @@ import {
 } from './elements';
 import { NewRecipeModal } from './new-recipe-modal';
 import _ from 'lodash';
+import { useCustomEventHandler } from '../../hooks';
 
 export const Recipes: React.FC = () => {
     const [recipes, saveRecipe, removeRecipe] = useRecipes();
@@ -32,6 +33,8 @@ export const Recipes: React.FC = () => {
 
         closeModal();
     }, [closeModal]);
+
+    useCustomEventHandler('new-recipe', () => openModal());
 
     return (
         <RecipesWrapper>

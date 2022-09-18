@@ -4,11 +4,12 @@ export type CustomEventHandler<EventArgs> = (event: CustomEvent<EventArgs>) => v
 
 export function useCustomEventDispatcher<EventArgs>(eventName: string, targetID?: string) {
 
-    const dispatchEvent = useCallback((args: EventArgs) => {
+    const dispatchEvent = useCallback((args?: EventArgs) => {
         const event = new CustomEvent<EventArgs>(eventName, {detail: args});
         const targetElement = targetID ? document.getElementById(targetID) : undefined;
         const target = targetElement || document;
 
+        console.log(eventName);
         target.dispatchEvent(event);
     }, []);
     
