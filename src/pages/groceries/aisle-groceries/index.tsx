@@ -48,7 +48,7 @@ export const AisleGroceries: React.FC<AisleGroceriesProps> = ({
     removeGrocery
 }) => {
     const [expanded, setExpanded] = useState(() => {
-        return !groceries.every(({checked}) => checked);
+        return groceries.length === 0 || !groceries.every(({checked}) => checked);
     });
 
     const [nameModalOpen, setNameModalOpen] = useState('');

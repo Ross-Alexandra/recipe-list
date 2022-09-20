@@ -4,9 +4,11 @@ import {
     RecipesIcon as _RecipesIcon
 } from '../../icons';
 
-const GroceriesIcon = <_GroceryIcon width={15} height={15} stroke={'#FFF'} />;
-const RecipesIcon = <_RecipesIcon width={15} height={15} stroke={'#FFF'} />;
-const MealsIcon = <_MealsIcon width={15} height={15} stroke={'#FFF'} />;
+const iconSize = 25;
+const iconStroke = '#FFF';
+const GroceriesIcon = <_GroceryIcon width={iconSize} height={iconSize} stroke={iconStroke} />;
+const RecipesIcon = <_RecipesIcon width={iconSize} height={iconSize} stroke={iconStroke} />;
+const MealsIcon = <_MealsIcon width={iconSize} height={iconSize} stroke={iconStroke} />;
 
 const addGroceryText = 'Add Grocery';
 const addRecipeText = 'Add Recipe';

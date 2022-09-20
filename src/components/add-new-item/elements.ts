@@ -22,8 +22,8 @@ export const NewItemWrapper = styled.div<{
     place-items: center;
 
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
+    width: 55px;
+    height: 55px;
 
     transition: background-color 600ms;
     background-color: ${({currentPage, overlayOpen}) => overlayOpen ? accentColor(currentPage) : 'white'};
@@ -54,8 +54,8 @@ export const Modal = styled(_Modal)`
 `;
 
 export const MainButonAlternate = styled.div`
-    height: 15px;
-    width: 15px;
+    height: 25px;
+    width: 25px;
 `;
 
 export const ModalContentWrapper = styled.div`
@@ -65,8 +65,8 @@ export const ModalContentWrapper = styled.div`
     height: 100%;
 
     display: grid;
-    grid-template-columns: 1fr 40px;
-    grid-template-rows: 40px 40px 40px;
+    grid-template-columns: 1fr 55px;
+    grid-template-rows: 55px 55px 55px;
     row-gap: 10px;
 
     place-items: center;
@@ -99,8 +99,8 @@ export const ModalItemIcon = styled.div<{
     display: grid;
     place-items: center;
 
-    width: 27.5px;
-    height: 27.5px;
+    width: 40px;
+    height: 40px;
 
     background-color: ${({forPage}) => accentColor(forPage)};
     border-radius: 50%;

@@ -7,7 +7,6 @@ import {
 
 export const GroceryHeader = styled.div`
     display: grid;
-    grid-template-rows: .5fr 1fr;
     gap: 10px;
 
     width: 100%;
@@ -34,6 +33,8 @@ export const AddGroceryButton = styled.div`
 
 export const ClearGroceriesButton = styled.div`
     ${ButtonCSS()}
+
+    margin-left: auto;
 `;
 
 export const GroceryFooter = styled.div`

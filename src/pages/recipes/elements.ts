@@ -3,32 +3,25 @@ import { backgroundColor, contentObscureBackgroundColor, sectionBorderColor } fr
 import {
     Modal as _Modal
 } from '@ross-alexandra/react-utilities';
-import {
-    NewItem as _NewItem
-} from '../../icons';
 
 export const RecipesWrapper = styled.div``;
 
-export const NewRecipeWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    height: 90px;
+export const RecipesHeader = styled.div`
     border-bottom: 1px dashed ${sectionBorderColor};
-
-    padding-bottom: 5px;
 `;
 
-export const AddNewItemText = styled.h3`
-    margin-bottom: 5px;
+export const RecipesTitleText = styled.h4`
+    opacity: 0.5;
 
-    font-size: 25px;
+    padding-bottom: 10px;
 `;
 
-export const NewItem = styled(_NewItem)`
-    overflow: visible;
+export const AddRecipiesHelpText = styled.p`
+    font-size: 17px;
+    text-align: center;
+
+    border-top: 1px dashed ${sectionBorderColor};
+    padding: 10px 0px;
 `;
 
 export const Modal = styled(_Modal)`

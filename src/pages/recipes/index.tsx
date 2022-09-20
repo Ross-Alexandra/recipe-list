@@ -4,9 +4,9 @@ import { RecipeRow } from './recipe-row';
 
 import {
     RecipesWrapper,
-    NewRecipeWrapper,
-    AddNewItemText,
-    NewItem,
+    RecipesHeader,
+    RecipesTitleText,
+    AddRecipiesHelpText,
     Modal
 } from './elements';
 import { NewRecipeModal } from './new-recipe-modal';
@@ -36,8 +36,18 @@ export const Recipes: React.FC = () => {
 
     useCustomEventHandler('new-recipe', () => openModal());
 
+    const totalGroceries = recipes.length;
     return (
         <RecipesWrapper>
+            <RecipesHeader>
+                <RecipesTitleText>{totalGroceries || 'No'} recipies</RecipesTitleText>
+                {totalGroceries === 0 &&
+                    <AddRecipiesHelpText>
+                        You currently have no recipies, try adding one!
+                    </AddRecipiesHelpText>
+                }
+            </RecipesHeader>
+
             {recipes.map(({name, ingredients}) => 
                 <RecipeRow
                     key={name}
@@ -47,12 +57,6 @@ export const Recipes: React.FC = () => {
                     editRecipe={() => openModal(name)}
                 />
             )}
-            <NewRecipeWrapper onClick={() => openModal()}>
-                <AddNewItemText>New Recipe!</AddNewItemText>
-                <NewItem
-                    stroke={'#fff'}
-                />
-            </NewRecipeWrapper>
 
             <Modal
                 isOpen={addingNewRecipe}

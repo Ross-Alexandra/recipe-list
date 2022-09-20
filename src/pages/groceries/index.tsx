@@ -76,10 +76,11 @@ export const Groceries: React.FC = () => {
                     {groceries.length >= 1 && `${checkedGroceriesCount} of ${groceries.length} checked`}
                     {groceries.length === 0 && 'No groceries'}
                 </TotalItemsText>
-                <ButtonsWrapper>
-                    <AddGroceryButton onClick={() => setCreatingGrocery(true)}>New Item</AddGroceryButton>
-                    <ClearGroceriesButton onClick={() => setClearingGroceries(true)}>Clear List</ClearGroceriesButton>
-                </ButtonsWrapper>
+                {groceries.length > 0 &&
+                    <ButtonsWrapper>
+                        <ClearGroceriesButton onClick={() => setClearingGroceries(true)}>Clear List</ClearGroceriesButton>
+                    </ButtonsWrapper>
+                }
             </GroceryHeader>
 
             {aisles.map(name => 

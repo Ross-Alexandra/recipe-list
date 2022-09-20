@@ -42,7 +42,7 @@ export const AppBodyOuter = styled.div`
     width: 100%;
     flex-grow: 1;
 
-    margin-bottom: 60px;
+    margin-bottom: 70px;
     overflow: hidden;
 `;
 
