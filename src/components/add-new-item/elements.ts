@@ -7,11 +7,12 @@ import {
 import {
     Modal as _Modal
 } from '@ross-alexandra/react-utilities';
-import { contentObscureBackgroundColor } from '../../palette';
+import { contentObscureBackgroundColor, accentColor } from '../../palette';
 import { keyframes } from '@emotion/react';
 
 export const NewItemWrapper = styled.div<{
-    overlayOpen: boolean
+    overlayOpen: boolean;
+    currentPage: Page;
 }>`
     position: fixed;
     bottom: 60px;
@@ -24,7 +25,8 @@ export const NewItemWrapper = styled.div<{
     width: 40px;
     height: 40px;
 
-    background-color: white;
+    transition: background-color 600ms;
+    background-color: ${({currentPage, overlayOpen}) => overlayOpen ? accentColor(currentPage) : 'white'};
 
     cursor: pointer;
 
@@ -92,6 +94,7 @@ export const ModalItemName = styled.h5<{
 
 export const ModalItemIcon = styled.div<{
     index: number;
+    forPage: Page;
 }>`
     display: grid;
     place-items: center;
@@ -99,7 +102,7 @@ export const ModalItemIcon = styled.div<{
     width: 27.5px;
     height: 27.5px;
 
-    background-color: white;
+    background-color: ${({forPage}) => accentColor(forPage)};
     border-radius: 50%;
 
     color: black;

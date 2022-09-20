@@ -29,9 +29,10 @@ export interface AddNewItemProps {
     currentPage: Page;
 }
 
-export const AddNewItem: React.FC<AddNewItemProps> = ({currentPage}) => {
+export const AddNewItem: React.FC<AddNewItemProps> = ({currentPage: openedPage}) => {
     const [overlayActive, setOverlayActive] = useState(false);
     const [hidePlus, setHidePlus] = useState(false);
+    const [currentPage, setCurrentPage] = useState(openedPage);
 
     const history = useHistory();
     const newRecipeDispatch = useCustomEventDispatcher('new-recipe');
@@ -97,6 +98,7 @@ export const AddNewItem: React.FC<AddNewItemProps> = ({currentPage}) => {
     return (
         <>
             <NewItemWrapper 
+                currentPage={currentPage}
                 overlayOpen={overlayActive}
                 onClick={toggleOverlay}
             >
@@ -110,7 +112,10 @@ export const AddNewItem: React.FC<AddNewItemProps> = ({currentPage}) => {
                         from {transform: rotate(0deg)}
                         to {transform: rotate(-90deg)}
                     `}
-                    afterAnimateOut={() => setHidePlus(false)}
+                    afterAnimateOut={() => {
+                        setHidePlus(false);
+                        setCurrentPage(openedPage);
+                    }}
                 >
                     <MainButonAlternate>
                         {PrimaryIcon}
@@ -139,6 +144,7 @@ export const AddNewItem: React.FC<AddNewItemProps> = ({currentPage}) => {
                     <ModalItemIcon
                         index={2}
                         onClick={() => eventDispatchers[alternateOnClicks[0]]?.()}
+                        forPage={alternateOnClicks[0]}
                     >
                         {alternateIcons[0]}
                     </ModalItemIcon>
@@ -146,6 +152,7 @@ export const AddNewItem: React.FC<AddNewItemProps> = ({currentPage}) => {
                     <ModalItemIcon
                         index={1}
                         onClick={() => eventDispatchers[alternateOnClicks[1]]?.()}
+                        forPage={alternateOnClicks[1]}
                     >
                         {alternateIcons[1]}
                     </ModalItemIcon>

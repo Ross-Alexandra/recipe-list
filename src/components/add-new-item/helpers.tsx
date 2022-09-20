@@ -3,11 +3,10 @@ import {
     MealsIcon as _MealsIcon,
     RecipesIcon as _RecipesIcon
 } from '../../icons';
-import { backgroundColor } from '../../palette';
 
-const GroceriesIcon = <_GroceryIcon width={15} height={15} stroke={backgroundColor} />;
-const RecipesIcon = <_RecipesIcon width={15} height={15} stroke={backgroundColor} />;
-const MealsIcon = <_MealsIcon width={15} height={15} stroke={backgroundColor} />;
+const GroceriesIcon = <_GroceryIcon width={15} height={15} stroke={'#FFF'} />;
+const RecipesIcon = <_RecipesIcon width={15} height={15} stroke={'#FFF'} />;
+const MealsIcon = <_MealsIcon width={15} height={15} stroke={'#FFF'} />;
 
 const addGroceryText = 'Add Grocery';
 const addRecipeText = 'Add Recipe';
