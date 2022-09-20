@@ -88,12 +88,14 @@ export const AddNewItem: React.FC<AddNewItemProps> = ({currentPage: openedPage})
     }, [setOverlayActive]);
 
     const toggleOverlay = useCallback(() => {
+        setCurrentPage(openedPage);
+
         if (overlayActive) {
             closeOverlay();
             eventDispatchers[primaryOnClick]?.();
         }
         else openOverlay();
-    }, [overlayActive, closeOverlay, openOverlay, primaryOnClick]);
+    }, [overlayActive, closeOverlay, openOverlay, primaryOnClick, openedPage]);
 
     return (
         <>
@@ -112,10 +114,7 @@ export const AddNewItem: React.FC<AddNewItemProps> = ({currentPage: openedPage})
                         from {transform: rotate(0deg)}
                         to {transform: rotate(-90deg)}
                     `}
-                    afterAnimateOut={() => {
-                        setHidePlus(false);
-                        setCurrentPage(openedPage);
-                    }}
+                    afterAnimateOut={() => setHidePlus(false)}
                 >
                     <MainButonAlternate>
                         {PrimaryIcon}
