@@ -7,6 +7,8 @@ import {
 
 export const GroceryHeader = styled.div`
     display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
     gap: 10px;
 
     width: 100%;
@@ -41,13 +43,14 @@ export const GroceryFooter = styled.div`
     display: grid;
     place-items: center;
 
-    height: 100px;
     border-bottom: 1px dashed ${sectionBorderColor};
 `;
 
 export const AddItemsToListText = styled.p`
     font-size: 17px;
-    text-align: center;    
+    text-align: center;
+    
+    padding: 10px 0px;
 `;
 
 export const ModalTitle = styled.h2`
