@@ -5,11 +5,13 @@ import {
     ModalFrame as _ModalFrame
 } from '@ross-alexandra/react-utilities';
 import { 
-    AddToList as _AddToList,
+    AddGrocery as _AddToList,
     Chevron as _Chevron,
-    RemoveFromList as _RemoveFromList,
+    RemoveGrocery as _RemoveFromList,
     GarbageCan as _GarbageCan,
-    EditIcon as _EditIcon
+    EditIcon as _EditIcon,
+    AddMeal,
+    RemoveMeal
 } from '../../../icons';
 import { backgroundColor, ButtonCSS, sectionBackgroundColor, sectionBorderColor } from '../../../palette';
 import { NewItem } from '../new-recipe-modal/elements';
@@ -52,16 +54,23 @@ export const RecipeTitle = styled.h3`
 
 export const RecipeHeaderIcons = styled.div`
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     margin-left: auto;
     place-items: end;
 
-    gap: 25px;
+    gap: 15px;
 `;
 
 export const AddAll = styled(NewItem)`
     overflow: visible;
 
+    cursor: pointer;
+`;
+
+export const AddMealIcon = styled(AddMeal)`
+    cursor: pointer;
+`;
+export const RemoveMealIcon = styled(RemoveMeal)`
     cursor: pointer;
 `;
 

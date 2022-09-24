@@ -8,6 +8,8 @@ import {
     Chevron,
     RecipeHeaderIcons,
     RecipeTitle,
+    AddMealIcon,
+    RemoveMealIcon,
     GarbageCan,
     EditIcon,
     IngredientsWrapper,
@@ -27,6 +29,8 @@ import {
     SecondaryButton,
     INGREDIENT_ROW_HEIGHT,
 } from './elements';
+import { useMeals } from '../../../services/mealService';
+import _ from 'lodash';
 
 export interface RecipeRowProps {
     name: string;
@@ -37,6 +41,7 @@ export interface RecipeRowProps {
 
 export const RecipeRow: React.FC<RecipeRowProps> = ({name, ingredients, removeRecipe, editRecipe}) => {
     const [groceries, {save: saveGrocery, remove: removeGrocery}] = useGroceries();
+    const [meals, saveMeal, removeMeal] = useMeals();
     const [expanded, setExpanded] = useState(false);
     const [removeWarningDisplayed, setRemoveWarningDisplayed] = useState(false);
     
@@ -81,6 +86,21 @@ export const RecipeRow: React.FC<RecipeRowProps> = ({name, ingredients, removeRe
                 <Chevron expanded={expanded} stroke={'#FFF'} />
                 <RecipeTitle>{name}</RecipeTitle>
                 <RecipeHeaderIcons>
+                    {!_.isUndefined(_.find(meals, {name})) ? (
+                        <RemoveMealIcon stroke={'#FFF'} onClick={(e) => {
+                            e.stopPropagation();
+
+                            removeMeal(name);
+                        }} 
+                        />
+                    ) : (
+                        <AddMealIcon stroke={'#FFF'} onClick={(e) => {
+                            e.stopPropagation();
+
+                            saveMeal(name);
+                        }} 
+                        />
+                    )}
                     <EditIcon stroke={'#FFF'} onClick={onClickEdit} />
                     <GarbageCan stroke={'#FFF'} onClick={onClickGarbageCan}/>
                 </RecipeHeaderIcons>

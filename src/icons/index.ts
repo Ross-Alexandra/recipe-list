@@ -1,3 +1,5 @@
+export * from './add-grocery';
+export * from './add-meal';
 export * from './add-to-list';
 export * from './checked-box';
 export * from './chevron';
@@ -11,4 +13,6 @@ export * from './plus';
 export * from './new-item';
 export * from './recipes';
 export * from './remove-from-list';
+export * from './remove-grocery';
+export * from './remove-meal';
 export * from './unchecked-box';
