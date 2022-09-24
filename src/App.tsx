@@ -13,6 +13,7 @@ import {
 
 import { 
     Groceries,
+    Meals,
     Recipes,
 } from './pages';
 
@@ -88,7 +89,7 @@ export const App: React.FC = () => {
                             <Groceries />
                         </Route>
                         <Route exact path='/meals'>
-                            <p>Meals</p>
+                            <Meals />
                         </Route>
 
                         {/* Redirect route for when user first lands or if they

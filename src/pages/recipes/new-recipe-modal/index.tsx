@@ -151,6 +151,11 @@ export const NewRecipeModal: React.FC<NewRecipeModalProps> = ({
                         hasErrors={!_.isEmpty(errors.ingredientName)}
                         value={newIngredientName}
                         onChange={onNewIngredientNameChange}
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter') {
+                                saveCurrentIngredient();
+                            }
+                        }}
                     />
                     {!_.isEmpty(errors.ingredientName) && (
                         <ErrorText>{_.get(errorCodesToText, errors.ingredientName?.[0])}</ErrorText>

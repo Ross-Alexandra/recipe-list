@@ -19,6 +19,10 @@ interface Grocery {
     checked: boolean;
 }
 
+interface Meal {
+    name: string;
+}
+
 interface Window {
     //eslint-disable-next-line @typescript-eslint/no-explicit-any
     NavigationBar: any;

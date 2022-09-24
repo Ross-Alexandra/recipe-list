@@ -8,7 +8,6 @@ import { AisleGroceries } from './aisle-groceries';
 import {
     GroceryHeader,
     ButtonsWrapper,
-    AddGroceryButton,
     TotalItemsText,
     ClearGroceriesButton,
     GroceryFooter,
@@ -40,7 +39,6 @@ export const Groceries: React.FC = () => {
     }] = useFieldErrors<{name: string[], aisle: string[]}>();
 
     const handleNewGroceryEvent = useCallback(() => {
-        console.log('handling new grocery event');
         setCreatingGrocery(true);
     }, [setCreatingGrocery]);
     useCustomEventHandler('new-grocery', handleNewGroceryEvent);
