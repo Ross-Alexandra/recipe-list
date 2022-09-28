@@ -13,7 +13,6 @@ import {
     GarbageCan,
     EditIcon,
     IngredientsWrapper,
-    Ingredient,
     AddToList,
     RemoveFromList,
     IngredientInfo,
@@ -31,6 +30,7 @@ import {
 } from './elements';
 import { useMeals } from '../../../services/mealService';
 import _ from 'lodash';
+import { Ingredient } from './ingredient';
 
 export interface RecipeRowProps {
     name: string;
@@ -134,22 +134,14 @@ export const RecipeRow: React.FC<RecipeRowProps> = ({name, ingredients, removeRe
                     {ingredients.map(({name: ingredientName, aisle}, index) => 
                         <Ingredient
                             key={index}
-                            onClick={() => {
-                                const included = groceries.map(({name}) => name).includes(ingredientName);
-                                if (included) removeGrocery(ingredientName);
-                                else saveGrocery(ingredientName, aisle, name);
-                            }}
-                        >
-                            <IngredientInfo>
-                                <IngredientName>{ingredientName}</IngredientName>
-                                <IngredientAisle>{aisle}</IngredientAisle>
-                            </IngredientInfo>
-                            {groceries.map(({name}) => name).includes(ingredientName) ? (
-                                <RemoveFromList stroke={'#FFF'} />
-                            ) : (
-                                <AddToList stroke={'#FFF'} />
-                            )}
-                        </Ingredient>
+                            index={index}
+                            name={ingredientName}
+                            aisle={aisle}
+                            recipeName={name}
+                            groceries={groceries}
+                            saveGrocery={saveGrocery}
+                            removeGrocery={removeGrocery}
+                        />
                     )}
                 </IngredientsWrapper>
             </Animate>

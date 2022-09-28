@@ -96,7 +96,7 @@ export const Animate = styled(_Animate)`
 `;
 
 export const INGREDIENT_ROW_HEIGHT = 70;
-export const Ingredient = styled.div`
+export const IngredientWrapper = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -153,7 +153,7 @@ export const RemoveFromList = styled(_RemoveFromList)`
     cursor: pointer;
 `;
 
-export const IngredientSummary = styled(Ingredient)`
+export const IngredientSummary = styled(IngredientWrapper)`
     border-bottom: 1px solid white;
 `;
 
