@@ -8,6 +8,7 @@
     "@awesome-cordova-plugins/status-bar": "^5.45.0",
     "@capacitor/android": "4.1.0",
     "@capacitor/app": "4.0.1",
+    "@capacitor/assets": "^1.0.3",
     "@capacitor/core": "4.1.0",
     "@capacitor/haptics": "4.0.1",
     "@capacitor/keyboard": "4.0.1",
@@ -61,10 +62,13 @@
     "eject": "react-scripts eject",
     "lint": "eslint src/* --fix",
     "start:web": "ionic serve",
-    "start:android": "ionic capacitor run android -l --external -c -s",
+    "start:android": "npm run assets:generate && ionic capacitor run android -l --external -c -s",
     "build:web": "npm run build",
-    "build:android": "ionic capacitor build",
-    "install:android": "ionic capacitor copy android"
+    "build:android": "npm run assets:generate && ionic capacitor build",
+    "install:android": "npm run assets:generate && ionic capacitor copy android && ionic capacitor open android",
+    "publish:android": "npm run assets:generate && ionic capacitor copy && ionic capacitor sync && ionic capacitor open android",
+    "capacitor-assets": "capacitor-assets",
+    "assets:generate": "capacitor-assets generate --android --pwa"
   },
   "eslintConfig": {
     "extends": [
