@@ -84,7 +84,9 @@ export const AisleGroceries: React.FC<AisleGroceriesProps> = ({
                                 {checked ? (
                                     <GroceryCheckedBox
                                         stroke={'#FFF'}
-                                        onClick={() => {
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+
                                             if (checked) uncheckGrocery(name);
                                             else checkGrocery(name);
                                         }}    
@@ -92,7 +94,9 @@ export const AisleGroceries: React.FC<AisleGroceriesProps> = ({
                                 ) : (
                                     <GroceryUncheckedBox
                                         stroke={'#FFF'}
-                                        onClick={() => {
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+
                                             if (checked) uncheckGrocery(name);
                                             else checkGrocery(name);
                                         }}    
