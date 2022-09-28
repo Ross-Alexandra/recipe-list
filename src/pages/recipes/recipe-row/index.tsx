@@ -156,6 +156,7 @@ export const RecipeRow: React.FC<RecipeRowProps> = ({name, ingredients, removeRe
                         <SecondaryButton onClick={() => {
                             ingredients.forEach(({name: groceryName}) => removeGrocery(groceryName, name));
                             removeRecipe(name);
+                            removeMeal(name);
                         }}>
                             Yes
                         </SecondaryButton>
