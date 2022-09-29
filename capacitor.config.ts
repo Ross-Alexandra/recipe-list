@@ -2,7 +2,7 @@ import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
     appId: 'rossalexandra.recipeList',
-    appName: 'Recilist',
+    appName: 'Recipe List',
     webDir: 'build',
     bundledWebRuntime: false
 };
