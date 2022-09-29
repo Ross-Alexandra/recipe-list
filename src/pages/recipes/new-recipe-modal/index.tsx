@@ -106,7 +106,7 @@ export const NewRecipeModal: React.FC<NewRecipeModalProps> = ({
         removeRecipeIngredient(nameToEdit);
         setNewIngredientAisle(aisle);
         setNewIngredientName(nameToEdit);
-    }, []);
+    }, [recipeIngredients]);
 
     return (
         <ModalFrame handleClose={closeModal} closeButtonColor={'#FFF'}>
