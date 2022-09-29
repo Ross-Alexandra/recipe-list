@@ -34,6 +34,12 @@ export const Modal = styled(_Modal)`
     }
 
     .modal-background {
+        // inset not supported by ionic.
+        top: 0px;
+        bottom: 0px;
+        right: 0px;
+        left: 0px;
+        
         background-color: ${contentObscureBackgroundColor};
     }
 `;
