@@ -64,8 +64,8 @@
     "start:web": "ionic serve",
     "start:android": "npm run assets:generate && ionic capacitor run android -l --external -c -s",
     "build:web": "npm run build",
-    "build:android": "npm run assets:generate && ionic capacitor build",
-    "install:android": "npm run assets:generate && ionic capacitor sync && ionic capacitor copy && ionic capacitor open android",
+    "build:android": "npm run assets:generate && ionic capacitor build android",
+    "install:android": "ionic capacitor add android && npm run assets:generate && ionic capacitor sync && ionic capacitor copy android && ionic capacitor open android",
     "capacitor-assets": "capacitor-assets",
     "assets:generate": "capacitor-assets generate --android --pwa"
   },

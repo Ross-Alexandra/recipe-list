@@ -10,7 +10,6 @@
 
 # production
 /build
-/android
 /icons
 
 # misc
