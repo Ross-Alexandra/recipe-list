@@ -46,6 +46,7 @@ export const ButtonCSS = () => css`
 
     font-size: 17px;
     font-family: 'Poppins', sans-serif;
+    color: white;
 
     background-color: ${sectionBackgroundColor};
     border: 1px solid ${sectionBorderColor};
